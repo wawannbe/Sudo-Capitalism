@@ -134,6 +134,11 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 
 ## Changelog
 
+**v0.0.1**
+
+- Modified the `Lwjgl3Launcher.java` to remove unnecessary comments.
+- Made a proper `Main.java`
+
 **Initial commit**
 
 - The game can be run, for now it is just displaying the [LibGDX](https://libgdx.com/) logo.
