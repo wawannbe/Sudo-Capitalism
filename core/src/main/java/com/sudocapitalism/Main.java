@@ -3,6 +3,7 @@ package com.sudocapitalism;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -12,59 +13,41 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  */
 public class Main extends ApplicationAdapter {
 
-    Texture logo;
+    public Texture logo;
 
-    SpriteBatch spriteBatch;
-    FitViewport viewport;
+    public SpriteBatch spriteBatch;
+
+    public Sprite textureSprite;
 
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
-        viewport = new FitViewport(5, 5);
 
         logo = new Texture("libgdx.png");
-    }
 
-    @Override
-    public void resize(int width, int height) {
-        viewport.update(width, height, true); // true centers the camera
+        textureSprite = new Sprite(logo);
+        textureSprite.setBounds(0, 0, 200, 200);
     }
 
     @Override
     public void render() {
-        input();
-        logic();
-        draw();
-
-    }
-
-    private void input() {
-
-    }
-
-    private void logic() {
-
-    }
-
-    private void draw() {
-        ScreenUtils.clear(Color.BLACK);
-
-        viewport.apply();
-
-        spriteBatch.setProjectionMatrix(viewport.getCamera().combined);
+        ScreenUtils.clear(Color.CLEAR);
 
         spriteBatch.begin();
 
-        float worldWidth = viewport.getWorldWidth();
-        float worldHeight = viewport.getWorldHeight();
-
-        spriteBatch.draw(logo, 1, 2, 3, 1);
+        textureSprite.draw(spriteBatch);
 
         spriteBatch.end();
     }
 
     @Override
     public void dispose() {
+        logo.dispose();
         spriteBatch.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     }
 }
