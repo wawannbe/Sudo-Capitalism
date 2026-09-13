@@ -15,6 +15,9 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 .
 ├── assets
 │   ├── assets.txt
+│   ├── atlas
+│   │   ├── characters.atlas
+│   │   └── characters.png
 │   ├── libgdx.png
 │   └── ui
 │       ├── font.fnt
@@ -36,7 +39,13 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │       └── main
 │   │   │           └── com
 │   │   │               └── sudocapitalism
-│   │   │                   └── Main.class
+│   │   │                   ├── camera
+│   │   │                   │   └── Orthographic.class
+│   │   │                   ├── Main.class
+│   │   │                   ├── ui
+│   │   │                   │   ├── MainMenu.class
+│   │   │                   │   └── SceneUI.class
+│   │   │                   └── Utils.class
 │   │   ├── generated
 │   │   │   └── sources
 │   │   │       ├── annotationProcessor
@@ -49,6 +58,11 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │   └── core-1.0.0.jar
 │   │   └── tmp
 │   │       ├── compileJava
+│   │       │   ├── compileTransaction
+│   │       │   │   ├── backup-dir
+│   │       │   │   └── stash-dir
+│   │       │   │       ├── Main.class.uniqueId0
+│   │       │   │       └── MainMenu.class.uniqueId1
 │   │       │   └── previous-compilation-data.bin
 │   │       └── jar
 │   │           └── MANIFEST.MF
@@ -89,6 +103,9 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   ├── resources
 │   │   │   └── main
 │   │   │       ├── assets.txt
+│   │   │       ├── atlas
+│   │   │       │   ├── characters.atlas
+│   │   │       │   └── characters.png
 │   │   │       ├── libgdx128.png
 │   │   │       ├── libgdx16.png
 │   │   │       ├── libgdx32.png
@@ -99,6 +116,9 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │           ├── font-list.fnt
 │   │   │           ├── font-subtitle.fnt
 │   │   │           ├── font-window.fnt
+│   │   │           ├── mainMenu.atlas
+│   │   │           ├── mainMenu.json
+│   │   │           ├── mainMenu.png
 │   │   │           ├── uiskin.atlas
 │   │   │           ├── uiskin.json
 │   │   │           └── uiskin.png
@@ -137,7 +157,6 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 **v0.0.1**
 
 - Modified the `Lwjgl3Launcher.java` to remove unnecessary comments.
-- Made a proper `Main.java`
 
 **Initial commit**
 
