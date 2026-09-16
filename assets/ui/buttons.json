@@ -1,0 +1,33 @@
+{
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	start: {
+		up: start
+		down: start_clicked
+		over: start_hover
+	}
+	options: {
+		up: options
+		down: optiond_clicked
+		over: optiond_hover
+	}
+	exit: {
+		up: exit
+		down: exit_clicked
+		over: exit_hover
+	}
+	load_game: {
+		up: load_game
+		down: load_game_clicked
+		over: load_game_hover
+	}
+	new_game: {
+		up: new_game
+		down: new_game_clicked
+		over: new_game_hover
+	}
+	back_arrow: {
+		up: back_arrow
+		down: back_arrow_clicked
+	}
+}
+}

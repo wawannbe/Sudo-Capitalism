@@ -16,10 +16,11 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 ├── assets
 │   ├── assets.txt
 │   ├── atlas
-│   │   ├── characters.atlas
-│   │   └── characters.png
 │   ├── libgdx.png
 │   └── ui
+│       ├── buttons.atlas
+│       ├── buttons.json
+│       ├── buttons.png
 │       ├── font.fnt
 │       ├── font-list.fnt
 │       ├── font-subtitle.fnt
@@ -39,13 +40,17 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │       └── main
 │   │   │           └── com
 │   │   │               └── sudocapitalism
-│   │   │                   ├── camera
-│   │   │                   │   └── Orthographic.class
 │   │   │                   ├── Main.class
-│   │   │                   ├── ui
-│   │   │                   │   ├── MainMenu.class
-│   │   │                   │   └── SceneUI.class
-│   │   │                   └── Utils.class
+│   │   │                   └── ui
+│   │   │                       ├── MainScreen$1.class
+│   │   │                       ├── MainScreen$2.class
+│   │   │                       ├── MainScreen$3.class
+│   │   │                       ├── MainScreen.class
+│   │   │                       ├── OptionsScreen.class
+│   │   │                       ├── SaveLoadScreen$1.class
+│   │   │                       ├── SaveLoadScreen$2.class
+│   │   │                       ├── SaveLoadScreen$3.class
+│   │   │                       └── SaveLoadScreen.class
 │   │   ├── generated
 │   │   │   └── sources
 │   │   │       ├── annotationProcessor
@@ -62,7 +67,10 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │       │   │   ├── backup-dir
 │   │       │   │   └── stash-dir
 │   │       │   │       ├── Main.class.uniqueId0
-│   │       │   │       └── MainMenu.class.uniqueId1
+│   │       │   │       ├── SaveLoadScreen$1.class.uniqueId4
+│   │       │   │       ├── SaveLoadScreen$2.class.uniqueId2
+│   │       │   │       ├── SaveLoadScreen$3.class.uniqueId3
+│   │       │   │       └── SaveLoadScreen.class.uniqueId1
 │   │       │   └── previous-compilation-data.bin
 │   │       └── jar
 │   │           └── MANIFEST.MF
@@ -72,7 +80,11 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │           └── java
 │               └── com
 │                   └── sudocapitalism
-│                       └── Main.java
+│                       ├── Main.java
+│                       └── ui
+│                           ├── MainScreen.java
+│                           ├── OptionsScreen.java
+│                           └── SaveLoadScreen.java
 ├── gradle
 │   ├── gradle-daemon-jvm.properties
 │   └── wrapper
@@ -104,21 +116,19 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │   └── main
 │   │   │       ├── assets.txt
 │   │   │       ├── atlas
-│   │   │       │   ├── characters.atlas
-│   │   │       │   └── characters.png
 │   │   │       ├── libgdx128.png
 │   │   │       ├── libgdx16.png
 │   │   │       ├── libgdx32.png
 │   │   │       ├── libgdx64.png
 │   │   │       ├── libgdx.png
 │   │   │       └── ui
+│   │   │           ├── buttons.atlas
+│   │   │           ├── buttons.json
+│   │   │           ├── buttons.png
 │   │   │           ├── font.fnt
 │   │   │           ├── font-list.fnt
 │   │   │           ├── font-subtitle.fnt
 │   │   │           ├── font-window.fnt
-│   │   │           ├── mainMenu.atlas
-│   │   │           ├── mainMenu.json
-│   │   │           ├── mainMenu.png
 │   │   │           ├── uiskin.atlas
 │   │   │           ├── uiskin.json
 │   │   │           └── uiskin.png
@@ -150,9 +160,74 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 
 ## Class diagram
 
-*Coming soon*
+```mermaid
+classDiagram
+
+class Game {
+    <<Abstract>>
+}
+
+class Screen {
+    <<interface>>
+}
+
+class Main {
++create() void
++getScreenList() ArrayList<Screen>
++setScreen(Screen) void
+}
+
+class MainScreen {
+-Main main
+-Stage stage
++show() void
++render(float delta) void
++resize(int width, int height) void
++pause() void
++resume() void
++hide() void
++dispose() void
+}
+
+class SaveLoadScreen {
+-Main main
+-Stage stage
++show() void
++render(float delta) void
++resize(int width, int height) void
++pause() void
++resume() void
++hide() void
++dispose() void
+}
+
+class OptionsScreen {
+-Main main
+-Stage stage
++show() void
++render(float delta) void
++resize(int width, int height) void
++pause() void
++resume() void
++hide() void
++dispose() void
+}
+
+Main --|> Game
+Main --> "*" Screen : screenList
+MainScreen ..|> Screen
+SaveLoadScreen ..|> Screen 
+OptionsScreen ..|> Screen
+
+```
 
 ## Changelog
+
+**v0.0.1**
+
+- A `%ainScreen` class has been created to display a proper home screen.
+- A `SaveLoadScreen`  class has been created to display the ability to load or start a new game.
+- The game can be exited properly.
 
 **v0.0.1**
 
