@@ -225,7 +225,7 @@ OptionsScreen ..|> Screen
 
 **v0.0.1**
 
-- A `%ainScreen` class has been created to display a proper home screen.
+- A `MainScreen` class has been created to display a proper home screen.
 - A `SaveLoadScreen`  class has been created to display the ability to load or start a new game.
 - The game can be exited properly.
 
