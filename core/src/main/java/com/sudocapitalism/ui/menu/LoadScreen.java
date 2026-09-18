@@ -1,4 +1,4 @@
-package com.sudocapitalism.ui;
+package com.sudocapitalism.ui.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,17 +8,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
 
-public class MainScreen implements Screen {
+public class LoadScreen implements Screen {
 
     private final Main main;
 
     private Stage stage;
 
-    public  MainScreen(Main main) {
+    public LoadScreen(Main main) {
         this.main = main;
     }
 
@@ -33,37 +35,36 @@ public class MainScreen implements Screen {
 
         table.setDebug(false);
 
-        Skin buttonSkin  = new Skin(Gdx.files.internal("ui/buttons.json"));
-
-        Button startButton = new Button(buttonSkin.optional("start", Button.ButtonStyle.class));
-        startButton.addListener(new ChangeListener() {
+        Button backButton = new TextButton("Back", main.uiSkin);
+        backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                main.setScreen(main.getScreenList().get(1));
+                main.setScreen(main.getScreenList().get("MainScreen"));
             }
         });
 
-        Button optionsButton = new Button(buttonSkin.optional("options", Button.ButtonStyle.class));
-        optionsButton.addListener(new ChangeListener() {
+        Button newGameButton = new TextButton("New game", main.uiSkin);
+        newGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                main.setScreen(main.getScreenList().get(2));
+                main.setScreen(main.getScreenList().get("NewGameScreen"));
             }
         });
 
-        Button exitButton = new Button(buttonSkin.optional("exit", Button.ButtonStyle.class));
-        exitButton.addListener(new ChangeListener() {
+        Button loadGameButton = new TextButton("Load game", main.uiSkin);
+        loadGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
+                // TODO load a saved game
             }
         });
 
-        table.add(startButton).width(480).height(44f).center();
+        table.defaults().width(100f).padBottom(10f);
+        table.add(newGameButton);
         table.row();
-        table.add(optionsButton).padTop(40f).width(480).height(44f);
+        table.add(loadGameButton);
         table.row();
-        table.add(exitButton).padTop(40f).width(480).height(44f);
+        table.add(backButton);
 
         stage.addActor(table);
     }
@@ -71,10 +72,11 @@ public class MainScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ScreenUtils.clear(main.getBackgroundColor());
 
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override
@@ -100,6 +102,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
+
     }
 }

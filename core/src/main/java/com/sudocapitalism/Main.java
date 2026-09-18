@@ -1,32 +1,51 @@
 package com.sudocapitalism;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.sudocapitalism.ui.MainScreen;
-import com.sudocapitalism.ui.OptionsScreen;
-import com.sudocapitalism.ui.SaveLoadScreen;
-import java.util.ArrayList;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.sudocapitalism.gameState.GameState;
+import com.sudocapitalism.ui.game.DebugScreen;
+import com.sudocapitalism.ui.game.GameScreen;
+import com.sudocapitalism.ui.menu.MainScreen;
+import com.sudocapitalism.ui.menu.NewGameScreen;
+import com.sudocapitalism.ui.menu.OptionsScreen;
+import com.sudocapitalism.ui.menu.LoadScreen;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Game {
 
-    private ArrayList<Screen> screenList;
+    public Skin uiSkin;
+    private final Color backgroundColor = Color.SLATE;
 
-    public ArrayList<Screen> getScreenList() {
-        return screenList;
+    private Map<String, Screen> screenList;
+
+    public GameState gameState = new GameState();
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setScreenList(ArrayList<Screen> screenList) {
-        this.screenList = screenList;
+    public Map<String, Screen> getScreenList() {
+        return screenList;
     }
 
     @Override
     public void create() {
 
-        this.screenList = new ArrayList<>();
-        screenList.add(new MainScreen(this));
-        screenList.add(new SaveLoadScreen(this));
-        screenList.add(new OptionsScreen(this));
+        uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
 
-        setScreen(screenList.getFirst());
+        this.screenList = new HashMap<>();
+        screenList.put("MainScreen", new MainScreen(this));
+        screenList.put("LoadScreen", new LoadScreen(this));
+        screenList.put("OptionsScreen", new OptionsScreen(this));
+        screenList.put("NewGameScreen", new NewGameScreen(this, gameState));
+        screenList.put("GameScreen", new GameScreen(this, gameState));
+
+        screenList.put("DebugScreen", new DebugScreen(this, gameState));
+
+        setScreen(screenList.get("MainScreen"));
     }
 }

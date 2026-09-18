@@ -162,71 +162,253 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 
 ```mermaid
 classDiagram
+    
+    class Game {
+        <<Abstract>>
+    }
 
-class Game {
-    <<Abstract>>
-}
+    class Screen {
+        <<interface>>
+    }
 
-class Screen {
-    <<interface>>
-}
+    class Main {
+        +gameState GameState
+        +uiSkin Skin
+        -backgroundColor Color
+        -screenList Map~String, Screen~
+        
+        +getBackgroundColor() Color
+        +getScreenList() Map~String, Screen~
+        +create() void
+    }
 
-class Main {
-+create() void
-+getScreenList() ArrayList<Screen>
-+setScreen(Screen) void
-}
+    class MainScreen {
+        -Main main
+        -Stage stage
+        
+        +MainScreen(Main)
+        
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
 
-class MainScreen {
--Main main
--Stage stage
-+show() void
-+render(float delta) void
-+resize(int width, int height) void
-+pause() void
-+resume() void
-+hide() void
-+dispose() void
-}
+    class LoadScreen {
+        -Main main
+        -Stage stage
+        
+        +LoadScreen(Main)
+        
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
 
-class SaveLoadScreen {
--Main main
--Stage stage
-+show() void
-+render(float delta) void
-+resize(int width, int height) void
-+pause() void
-+resume() void
-+hide() void
-+dispose() void
-}
+    class OptionsScreen {
+        -Main main
+        -Stage stage
+        
+        +OptionsScreen(Main)
+        
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
+    
+    class DebugScreen {
+        -main Main
+        -gameState GameState
+        -stage Stage
+        
+        +DebugScreen(Main, GameState)
+        
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
 
-class OptionsScreen {
--Main main
--Stage stage
-+show() void
-+render(float delta) void
-+resize(int width, int height) void
-+pause() void
-+resume() void
-+hide() void
-+dispose() void
-}
+    class GameScreen {
+        -main Main
+        -gameState GameState
+        -stage Stage
 
-Main --|> Game
-Main --> "*" Screen : screenList
-MainScreen ..|> Screen
-SaveLoadScreen ..|> Screen 
-OptionsScreen ..|> Screen
+        +GameScreen(Main, GameState)
+        
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
 
+    class NewGameScreen {
+        -main Main
+        -gameState GameState
+        -stage Stage
+
+        +NewGameScreen(Main, GameState)
+
+        +show() void
+        +render(float) void
+        +resize(int, int) void
+        +pause() void
+        +resume() void
+        +hide() void
+        +dispose() void
+    }
+
+    class Genre {
+        FEMALE
+        MALE
+        UNSET
+    }
+
+    class Person {
+        # String firstName
+        # String lastName
+        # int age
+        # Genre genre
+        +Person(String, String, int, Genre)
+        +getFirstName() String
+        +getLastName() String
+        +getAge() int
+        +getGenre() Genre
+    }
+
+    class Player {
+        +Player(String, String, Genre)
+        +Player()
+        +setFirstName(String) void
+        +setLastName(String) void
+        +setGenre(Genre) void
+    }
+
+    class Company {
+        private double money
+        private String name
+        +Company()
+        +getMoney() double
+        +addMoney(double) void
+        +getName() String
+        +setName(String) void
+    }
+
+    class Economy {
+        +Economy(Company) void
+        +getPlayerCompany() Company
+    }
+
+    class Reputation {
+        +Reputation(Company) void
+        +getPlayerCompany() Company
+    }
+    
+    class GameStateListener {
+        <<interface>>
+        +updateMoney(GameState) void
+    }
+
+    class GameState {
+        private ArrayList~GameStateListener~ listeners
+        private final Economy economy
+        private final Reputation reputation
+        private final Company playerCompany
+        private final Player player
+        +GameState()
+        +addListener(GameStateListener) void
+        +removeListener(GameStateListener) void
+        +getPlayer() Player
+        +getPlayerCompany() Company
+        +notifyMoneyChanged() void
+        +addMoney(double) void
+    }
+
+    class ConsumableType {
+        FOOD
+        DRINK
+    }
+
+    class Item {
+        #name String
+        #description String
+        +Item(String, String)
+        +Item(String)
+        +getName() String
+        +getDescription() String
+    }
+
+    class Consumable {
+        +Consumable(String, String, ConsumableType, Effect) void
+        +Consumable(String, ConsumableType, Effect) void
+        +getConsumableType() ConsumableType
+        +getEffect() Effect
+    }
+    
+    class Effect {}
+
+    Main --|> Game
+    
+    Main --> "*" Screen : -screenList
+    Screen <|.. MainScreen
+    Screen <|.. LoadScreen
+    Screen <|.. OptionsScreen
+    Screen <|.. DebugScreen
+    Screen <|.. GameScreen
+    Screen <|.. NewGameScreen
+    
+    Genre --> "1" Person :  #genre
+    Player <|-- Person
+
+    Company "1" <-- Reputation : -playerCompany
+    Company "1" <-- Economy : -playerCompany
+
+    GameStateListener --> "*" GameState : -listeners
+    GameState --> "1" Economy : -economy
+    GameState --> "1" Reputation : -reputation
+    GameState --> "1" Company : -playerCompany
+    GameState --> "1" Player : -player
+    
+    Main --> GameState : -gameState
+
+    Item <|-- Consumable
+    Consumable --> "1" ConsumableType : #consumableType
+    Consumable --> "1" Effect : #effect
 ```
 
 ## Changelog
 
+**v0.1.0**
+
+- A `DebugScreen` has been added when starting a new game to check if the backend is running properly 
+- A `GameScreen` has been added to be the screen that handles the game in the future.
+- A `GameState` class has been implemented to handle the backend and the game loop, helped by the `GameStateListener` class.
+- The `MainScreen` and `LoadScreen` have been updated.
+- A `NewGameScreen` has been added when pressing on new game to init `GameState`.
+- An empty `OptionsScreen` has been created to handle settings in the future.
+- The backend is being implemented with classes such as `Person`, `Economy`...
+
 **v0.0.1**
 
 - A `MainScreen` class has been created to display a proper home screen.
-- A `SaveLoadScreen`  class has been created to display the ability to load or start a new game.
+- A `LoadScreen`  class has been created to display the ability to load or start a new game.
 - The game can be exited properly.
 
 **v0.0.1**
