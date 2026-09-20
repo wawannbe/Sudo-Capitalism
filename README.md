@@ -300,15 +300,27 @@ classDiagram
         +setLastName(String) void
         +setGenre(Genre) void
     }
+    
+    class Worker {
+        +Worker(String, String, int, Genre)
+        +Worker(Person person)
+    }
 
     class Company {
-        private double money
-        private String name
+        -double money
+        -String name
+        -ArrayList<Worker> employees
+        
         +Company()
-        +getMoney() double
-        +addMoney(double) void
+
         +getName() String
         +setName(String) void
+        +getMoney() double
+        +addMoney(double) void
+        +spendMoney(double) void
+        +getEmployees() ArrayList<Worker>
+        +hire(Person) void
+        +fire(Worker) void
     }
 
     class Economy {
@@ -376,6 +388,7 @@ classDiagram
     
     Genre --> "1" Person :  #genre
     Player <|-- Person
+    Worker <|-- Person
 
     Company "1" <-- Reputation : -playerCompany
     Company "1" <-- Economy : -playerCompany
@@ -394,6 +407,11 @@ classDiagram
 ```
 
 ## Changelog
+
+**v0.1.1**
+
+- The `Company` class received new methods to handle a basic gameplay
+- Javadoc added to the `Worker` class.
 
 **v0.1.0**
 
