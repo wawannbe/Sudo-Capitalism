@@ -481,6 +481,10 @@ classDiagram
 
 ## Changelog
 
+**v0.1.4**
+
+- A raw game UI has been implemented instead of the `DebugScreen`.
+
 **v0.1.3**
 
 - Added a `toString` override in the `Worker` class to display its stats.
