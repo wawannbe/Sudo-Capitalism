@@ -481,6 +481,12 @@ classDiagram
 
 ## Changelog
 
+**v0.1.3**
+
+- Added a `toString` override in the `Worker` class to display its stats.
+- Added a `toString` override in the `Company` class to display its employees.
+- Documentation added to the `GameState` class.
+
 **v0.1.2**
 
 - Workers now have a pseudo randomized efficiency assigned on creation.

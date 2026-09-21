@@ -13,7 +13,14 @@ import java.util.Random;
  */
 public class Worker extends Person {
 
+
+    // ---< Attributes >---
+
+    /** Rate representing the global efficiency of the worker */
     private double efficiency;
+
+
+    // ---< Constructors >---
 
     /**
      * Creates a new Worker based on given data.
@@ -83,5 +90,13 @@ public class Worker extends Person {
         if (rate != 0) {
             this.efficiency /= Math.abs(rate);
         }
+    }
+
+
+    // ---< toString >---
+
+    @Override
+    public String toString() {
+        return String.format("[Worker] -> %s %S - Efficiency: %.2f", this.firstName, this.lastName, this.efficiency);
     }
 }

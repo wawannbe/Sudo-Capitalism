@@ -13,14 +13,20 @@ import java.util.ArrayList;
  */
 public class Company {
 
-    /** The amount of money the company owns*/
+
+    // ---< Attributes >---
+
+    /** The amount of money the company owns */
     private double money;
 
     /** The name of the company */
     private String name;
 
-    /** List of workers employed by this company. */
+    /** List of workers employed by this company */
     private final ArrayList<Worker> employees;
+
+
+    // ---< Constructor >---
 
     /**
      * Default constructor initializing a company without a specific name with a starting capital.
@@ -111,5 +117,21 @@ public class Company {
      */
     public void fire(Worker worker) {
         this.employees.remove(worker);
+    }
+
+
+    // ---< toString >---
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(this.name);
+
+        stringBuilder.append(String.format("%.2f$\n", this.money));
+
+        for (Worker worker : this.employees) {
+            stringBuilder.append(worker.toString()).append('\n');
+        }
+
+        return stringBuilder.toString();
     }
 }
