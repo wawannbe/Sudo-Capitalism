@@ -85,7 +85,7 @@ public class NewGameScreen implements Screen {
                     gameState.getPlayerCompany().setName(companyNameField.getText());
                 }
 
-                main.setScreen(main.getScreenList().get("DebugScreen"));
+                main.setScreen(main.getScreenList().get("GameScreen"));
             }
         });
 

@@ -42,11 +42,14 @@ public class Main extends Game {
         screenList.put("LoadScreen", new LoadScreen(this));
         screenList.put("OptionsScreen", new OptionsScreen(this));
         screenList.put("NewGameScreen", new NewGameScreen(this, gameState));
+
+        GameScreen gameScreen = new GameScreen(this, gameState);
+        gameState.addListener(gameScreen);
         screenList.put("GameScreen", new GameScreen(this, gameState));
 
-        DebugScreen debugScreen = new DebugScreen(this, gameState);
-        gameState.addListener(debugScreen);
-        screenList.put("DebugScreen", debugScreen);
+//        DebugScreen debugScreen = new DebugScreen(this, gameState);
+//        gameState.addListener(debugScreen);
+//        screenList.put("DebugScreen", debugScreen);
 
         setScreen(screenList.get("MainScreen"));
     }
