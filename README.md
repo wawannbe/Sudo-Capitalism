@@ -18,9 +18,6 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   ├── atlas
 │   ├── libgdx.png
 │   └── ui
-│       ├── buttons.atlas
-│       ├── buttons.json
-│       ├── buttons.png
 │       ├── font.fnt
 │       ├── font-list.fnt
 │       ├── font-subtitle.fnt
@@ -40,17 +37,48 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │       └── main
 │   │   │           └── com
 │   │   │               └── sudocapitalism
+│   │   │                   ├── character
+│   │   │                   │   ├── Genre.class
+│   │   │                   │   ├── Person.class
+│   │   │                   │   ├── Player.class
+│   │   │                   │   └── worker
+│   │   │                   │       ├── InventoryManager.class
+│   │   │                   │       ├── MarketingManager.class
+│   │   │                   │       ├── ProductionManager.class
+│   │   │                   │       └── Worker.class
+│   │   │                   ├── company
+│   │   │                   │   └── Company.class
+│   │   │                   ├── gameState
+│   │   │                   │   ├── Economy
+│   │   │                   │   │   └── Economy.class
+│   │   │                   │   ├── GameState.class
+│   │   │                   │   ├── GameStateListener.class
+│   │   │                   │   └── Reputation
+│   │   │                   │       └── Reputation.class
+│   │   │                   ├── item
+│   │   │                   │   ├── consumable
+│   │   │                   │   │   ├── Consumable.class
+│   │   │                   │   │   └── ConsumableType.class
+│   │   │                   │   ├── Effect.class
+│   │   │                   │   └── Item.class
 │   │   │                   ├── Main.class
 │   │   │                   └── ui
-│   │   │                       ├── MainScreen$1.class
-│   │   │                       ├── MainScreen$2.class
-│   │   │                       ├── MainScreen$3.class
-│   │   │                       ├── MainScreen.class
-│   │   │                       ├── OptionsScreen.class
-│   │   │                       ├── SaveLoadScreen$1.class
-│   │   │                       ├── SaveLoadScreen$2.class
-│   │   │                       ├── SaveLoadScreen$3.class
-│   │   │                       └── SaveLoadScreen.class
+│   │   │                       ├── game
+│   │   │                       │   ├── DebugScreen.class
+│   │   │                       │   └── GameScreen.class
+│   │   │                       └── menu
+│   │   │                           ├── LoadScreen$1.class
+│   │   │                           ├── LoadScreen$2.class
+│   │   │                           ├── LoadScreen$3.class
+│   │   │                           ├── LoadScreen.class
+│   │   │                           ├── MainScreen$1.class
+│   │   │                           ├── MainScreen$2.class
+│   │   │                           ├── MainScreen$3.class
+│   │   │                           ├── MainScreen.class
+│   │   │                           ├── NewGameScreen$1.class
+│   │   │                           ├── NewGameScreen$2.class
+│   │   │                           ├── NewGameScreen.class
+│   │   │                           └── OptionsScreen.class
 │   │   ├── generated
 │   │   │   └── sources
 │   │   │       ├── annotationProcessor
@@ -66,11 +94,21 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │       │   ├── compileTransaction
 │   │       │   │   ├── backup-dir
 │   │       │   │   └── stash-dir
-│   │       │   │       ├── Main.class.uniqueId0
-│   │       │   │       ├── SaveLoadScreen$1.class.uniqueId4
-│   │       │   │       ├── SaveLoadScreen$2.class.uniqueId2
-│   │       │   │       ├── SaveLoadScreen$3.class.uniqueId3
-│   │       │   │       └── SaveLoadScreen.class.uniqueId1
+│   │       │   │       ├── DebugScreen.class.uniqueId1
+│   │       │   │       ├── GameScreen.class.uniqueId9
+│   │       │   │       ├── LoadScreen$1.class.uniqueId11
+│   │       │   │       ├── LoadScreen$2.class.uniqueId13
+│   │       │   │       ├── LoadScreen$3.class.uniqueId0
+│   │       │   │       ├── LoadScreen.class.uniqueId2
+│   │       │   │       ├── Main.class.uniqueId8
+│   │       │   │       ├── MainScreen$1.class.uniqueId6
+│   │       │   │       ├── MainScreen$2.class.uniqueId10
+│   │       │   │       ├── MainScreen$3.class.uniqueId14
+│   │       │   │       ├── MainScreen.class.uniqueId12
+│   │       │   │       ├── NewGameScreen$1.class.uniqueId5
+│   │       │   │       ├── NewGameScreen$2.class.uniqueId3
+│   │       │   │       ├── NewGameScreen.class.uniqueId4
+│   │       │   │       └── OptionsScreen.class.uniqueId7
 │   │       │   └── previous-compilation-data.bin
 │   │       └── jar
 │   │           └── MANIFEST.MF
@@ -80,11 +118,43 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │           └── java
 │               └── com
 │                   └── sudocapitalism
+│                       ├── character
+│                       │   ├── Genre.java
+│                       │   ├── Person.java
+│                       │   ├── Player.java
+│                       │   └── worker
+│                       │       ├── InventoryManager.java
+│                       │       ├── MarketingManager.java
+│                       │       ├── ProductionManager.java
+│                       │       └── Worker.java
+│                       ├── company
+│                       │   └── Company.java
+│                       ├── gameState
+│                       │   ├── Economy
+│                       │   │   └── Economy.java
+│                       │   ├── GameState.java
+│                       │   ├── GameStateListener.java
+│                       │   └── Reputation
+│                       │       └── Reputation.java
+│                       ├── item
+│                       │   ├── consumable
+│                       │   │   ├── Consumable.java
+│                       │   │   └── ConsumableType.java
+│                       │   ├── Effect.java
+│                       │   ├── equipment
+│                       │   │   ├── clothing
+│                       │   │   └── tool
+│                       │   └── Item.java
 │                       ├── Main.java
 │                       └── ui
-│                           ├── MainScreen.java
-│                           ├── OptionsScreen.java
-│                           └── SaveLoadScreen.java
+│                           ├── game
+│                           │   ├── DebugScreen.java
+│                           │   └── GameScreen.java
+│                           └── menu
+│                               ├── LoadScreen.java
+│                               ├── MainScreen.java
+│                               ├── NewGameScreen.java
+│                               └── OptionsScreen.java
 ├── gradle
 │   ├── gradle-daemon-jvm.properties
 │   └── wrapper
@@ -122,9 +192,6 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 │   │   │       ├── libgdx64.png
 │   │   │       ├── libgdx.png
 │   │   │       └── ui
-│   │   │           ├── buttons.atlas
-│   │   │           ├── buttons.json
-│   │   │           ├── buttons.png
 │   │   │           ├── font.fnt
 │   │   │           ├── font-list.fnt
 │   │   │           ├── font-subtitle.fnt
@@ -300,15 +367,33 @@ classDiagram
         +setLastName(String) void
         +setGenre(Genre) void
     }
+    
+    class Worker {
+        -double efficiency
+        
+        +Worker(String, String, int, Genre)
+        +Worker(Person person)
+        
+        +getEfficiency() double
+        +increaseEfficiency(double) void
+        +decreaseEfficiency(double) void
+    }
 
     class Company {
-        private double money
-        private String name
+        -double money
+        -String name
+        -ArrayList<Worker> employees
+        
         +Company()
-        +getMoney() double
-        +addMoney(double) void
+
         +getName() String
         +setName(String) void
+        +getMoney() double
+        +addMoney(double) void
+        +spendMoney(double) void
+        +getEmployees() ArrayList<Worker>
+        +hire(Person) void
+        +fire(Worker) void
     }
 
     class Economy {
@@ -376,6 +461,7 @@ classDiagram
     
     Genre --> "1" Person :  #genre
     Player <|-- Person
+    Worker <|-- Person
 
     Company "1" <-- Reputation : -playerCompany
     Company "1" <-- Economy : -playerCompany
@@ -394,6 +480,22 @@ classDiagram
 ```
 
 ## Changelog
+
+**v0.1.3**
+
+- Added a `toString` override in the `Worker` class to display its stats.
+- Added a `toString` override in the `Company` class to display its employees.
+- Documentation added to the `GameState` class.
+
+**v0.1.2**
+
+- Workers now have a pseudo randomized efficiency assigned on creation.
+- The efficiency can be increased and decreased at a given rate.
+
+**v0.1.1**
+
+- The `Company` class received new methods to handle a basic gameplay
+- Javadoc added to the `Worker` class.
 
 **v0.1.0**
 

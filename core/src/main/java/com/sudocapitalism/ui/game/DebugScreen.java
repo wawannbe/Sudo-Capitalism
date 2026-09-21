@@ -2,21 +2,28 @@ package com.sudocapitalism.ui.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
+import com.sudocapitalism.gameState.GameStateListener;
 
-public class DebugScreen implements Screen {
+public class DebugScreen implements Screen, GameStateListener {
 
     private final Main main;
 
     private final GameState gameState;
 
     private Stage stage;
+
+    private Label companyMoney;
 
     public DebugScreen (Main main, GameState gameState) {
         this.main = main;
@@ -35,22 +42,43 @@ public class DebugScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
 
-        table.setDebug(true);
+        table.setDebug(false);
 
         Label playerFirstName = new Label(gameState.getPlayer().getFirstName(), main.uiSkin);
         Label playerLastName = new Label(gameState.getPlayer().getLastName(), main.uiSkin);
         Label playerGenre = new Label(gameState.getPlayer().getGenre().toString(), main.uiSkin);
 
         Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
+        companyMoney = new Label(String.valueOf(gameState.getPlayerCompany().getMoney()) + '$', main.uiSkin);
 
-        table.defaults().padBottom(5f);
+
+        TextButton addMoneyButton = new TextButton("Add 10$", main.uiSkin);
+        addMoneyButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameState.addMoney(10);
+                gameState.notifyMoneyChanged();
+            }
+        });
+
+        TextButton spendMoneyButton = new TextButton("Spend 10$", main.uiSkin);
+        spendMoneyButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameState.spendMoney(10);
+                gameState.notifyMoneyChanged();
+            }
+        });
+
+        table.defaults().padBottom(5f).padRight(10f);
         table.add(playerFirstName);
-        table.row();
         table.add(playerLastName);
-        table.row();
         table.add(playerGenre);
-        table.row();
+
         table.add(companyName);
+        table.add(companyMoney);
+        table.add(addMoneyButton).width(100f);
+        table.add(spendMoneyButton).width(100f);
 
         stage.addActor(table);
     }
@@ -88,5 +116,10 @@ public class DebugScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    @Override
+    public void updateMoney(GameState gameState) {
+        companyMoney.setText(String.valueOf(gameState.getPlayerCompany().getMoney()) + '$');
     }
 }
