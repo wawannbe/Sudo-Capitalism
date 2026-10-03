@@ -39,7 +39,7 @@ public class LoadScreen implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                main.setScreen(main.getScreenList().get("MainScreen"));
+                main.setScreen(main.getScreenList().get("HomeScreen"));
             }
         });
 

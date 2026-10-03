@@ -481,6 +481,11 @@ classDiagram
 
 ## Changelog
 
+**v0.1.5**
+
+- The UI now uses [Raymond Buckley's Particle Park UI Skin](https://ray3k.wordpress.com/particle-park-ui-skin-for-scene2d-ui/).
+- A new layout has been implemented.
+
 **v0.1.4**
 
 - A raw game UI has been implemented instead of the `DebugScreen`.
@@ -504,16 +509,16 @@ classDiagram
 **v0.1.0**
 
 - A `DebugScreen` has been added when starting a new game to check if the backend is running properly 
-- A `GameScreen` has been added to be the screen that handles the game in the future.
+- A `MainScreen` has been added to be the screen that handles the game in the future.
 - A `GameState` class has been implemented to handle the backend and the game loop, helped by the `GameStateListener` class.
-- The `MainScreen` and `LoadScreen` have been updated.
+- The `HomeScreen` and `LoadScreen` have been updated.
 - A `NewGameScreen` has been added when pressing on new game to init `GameState`.
 - An empty `OptionsScreen` has been created to handle settings in the future.
 - The backend is being implemented with classes such as `Person`, `Economy`...
 
 **v0.0.1**
 
-- A `MainScreen` class has been created to display a proper home screen.
+- A `HomeScreen` class has been created to display a proper home screen.
 - A `LoadScreen`  class has been created to display the ability to load or start a new game.
 - The game can be exited properly.
 

@@ -1,11 +1,16 @@
 package com.sudocapitalism.gameState;
 
+import com.sudocapitalism.character.Genre;
+import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.Player;
 import com.sudocapitalism.company.Company;
 import com.sudocapitalism.gameState.Economy.Economy;
 import com.sudocapitalism.gameState.Reputation.Reputation;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -33,6 +38,8 @@ public class GameState {
     /** The active player character controlling the game session. */
     private final Player player;
 
+    private final ArrayList<Person> peoplePool;
+
 
     // ---< Constructor >---
 
@@ -51,6 +58,8 @@ public class GameState {
         this.reputation = new Reputation(this.playerCompany);
 
         this.player = new Player();
+
+        this.peoplePool = initPeople();
     }
 
 
@@ -145,4 +154,40 @@ public class GameState {
     public Reputation getReputation() {
         return reputation;
     }
+
+
+    // ---< People >---
+
+    public ArrayList<Person> initPeople() {
+
+        ArrayList<Person> people = new ArrayList<>();
+
+        try {
+            InputStream inputStream  =  getClass().getResourceAsStream("/data/people.csv");
+            Scanner scanner = new Scanner(inputStream);
+            scanner.useDelimiter(",");
+
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+
+                String[] data = line.split(",");
+
+                switch (data[3]) {
+                    case "M" -> people.add(new Person(data[0], data[1], Integer.parseInt(data[2]), Genre.MALE));
+                    case "F" -> people.add(new Person(data[0], data[1], Integer.parseInt(data[2]), Genre.FEMALE));
+                }
+            }
+            scanner.close();
+
+        } catch (Exception exception) {
+            System.out.println("bite");
+        }
+        return people;
+    }
+
+    public ArrayList<Person> getPeoplePool() {
+        return peoplePool;
+    }
+
+
 }

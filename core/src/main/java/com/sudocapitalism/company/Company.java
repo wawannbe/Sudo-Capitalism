@@ -25,6 +25,8 @@ public class Company {
     /** List of workers employed by this company */
     private final ArrayList<Worker> employees;
 
+    private final ArrayList<CompanyListener> listeners;
+
 
     // ---< Constructor >---
 
@@ -39,6 +41,8 @@ public class Company {
         this.money = 2000.0;
 
         this.employees = new ArrayList<>();
+
+        this.listeners= new ArrayList<>();
     }
 
 
@@ -107,6 +111,8 @@ public class Company {
      */
     public void hire(Person person) {
         this.employees.add(new Worker(person));
+
+        this.notifyEmployeesListChanged();
     }
 
     /**
@@ -117,6 +123,8 @@ public class Company {
      */
     public void fire(Worker worker) {
         this.employees.remove(worker);
+
+        this.notifyEmployeesListChanged();
     }
 
 
@@ -133,5 +141,19 @@ public class Company {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    // ---< Listeners >---
+
+    public void notifyEmployeesListChanged() {
+
+        for (CompanyListener  listener : this.listeners){
+            listener.employeesListChanged();
+        }
+    }
+
+    public void addListener(CompanyListener companyListener) {
+        this.listeners.add(companyListener);
     }
 }

@@ -6,9 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.ui.game.DebugScreen;
-import com.sudocapitalism.ui.game.GameScreen;
-import com.sudocapitalism.ui.menu.MainScreen;
+import com.sudocapitalism.ui.game.MainScreen;
+import com.sudocapitalism.ui.menu.HomeScreen;
 import com.sudocapitalism.ui.menu.NewGameScreen;
 import com.sudocapitalism.ui.menu.OptionsScreen;
 import com.sudocapitalism.ui.menu.LoadScreen;
@@ -18,7 +17,7 @@ import java.util.Map;
 public class Main extends Game {
 
     public Skin uiSkin;
-    private final Color backgroundColor = Color.SLATE;
+    private final Color backgroundColor = Color.ROYAL;
 
     private Map<String, Screen> screenList;
 
@@ -35,22 +34,23 @@ public class Main extends Game {
     @Override
     public void create() {
 
-        uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        uiSkin = new Skin(Gdx.files.internal("ui/Particle Park UI.json"));
 
         this.screenList = new HashMap<>();
-        screenList.put("MainScreen", new MainScreen(this));
+        screenList.put("HomeScreen", new HomeScreen(this));
         screenList.put("LoadScreen", new LoadScreen(this));
         screenList.put("OptionsScreen", new OptionsScreen(this));
         screenList.put("NewGameScreen", new NewGameScreen(this, gameState));
 
-        GameScreen gameScreen = new GameScreen(this, gameState);
+        MainScreen gameScreen = new MainScreen(this, gameState);
         gameState.addListener(gameScreen);
-        screenList.put("GameScreen", new GameScreen(this, gameState));
+        screenList.put("MainScreen", new MainScreen(this, gameState));
+        gameState.getPlayerCompany().addListener(gameScreen);
 
 //        DebugScreen debugScreen = new DebugScreen(this, gameState);
 //        gameState.addListener(debugScreen);
 //        screenList.put("DebugScreen", debugScreen);
 
-        setScreen(screenList.get("MainScreen"));
+        setScreen(screenList.get("HomeScreen"));
     }
 }

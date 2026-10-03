@@ -5,17 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
+import com.sudocapitalism.company.CompanyListener;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
 
-public class GameScreen implements Screen, GameStateListener {
+public class MainScreen implements Screen, GameStateListener, CompanyListener {
 
     private final Main main;
 
@@ -23,7 +23,7 @@ public class GameScreen implements Screen, GameStateListener {
 
     private Stage stage;
 
-    public GameScreen(Main main, GameState gameState) {
+    public MainScreen(Main main, GameState gameState) {
         this.main = main;
 
         this.gameState = gameState;
@@ -37,27 +37,41 @@ public class GameScreen implements Screen, GameStateListener {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.setFillParent(true);
+        Table root = new Table();
+        root.setFillParent(true);
+        root.setDebug(true);
+        root.defaults().expandX();
 
-        table.setDebug(true);
+        Table topBar = new Table();
 
-        Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
-        Label companyMoney = new Label(String.valueOf(gameState.getPlayerCompany().getMoney()), main.uiSkin);
-        TextButton hireButton = new TextButton("Hire", main.uiSkin);
-        TextButton fireButton = new TextButton("Fire", main.uiSkin);
+            Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
 
-        table.add(companyName).top().left();
-        table.add(companyMoney).top().right();
+            topBar.add(companyName).top().center().colspan(3);
 
-        table.row();
-        table.add(new Table()).expand().colspan(2);
+        root.add(topBar).pad(10f, 0, 10f, 0);
+        root.row();
 
-        table.row();
-        table.add(hireButton).bottom().width(100f);
-        table.add(fireButton).bottom().width(100f);
 
-        stage.addActor(table);
+        Table dashboard = new Table();
+        root.add(dashboard).expand();
+
+
+        Table buttonBar = new Table();
+
+            TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
+            TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
+            TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
+
+            buttonBar.defaults().pad(0, 10f, 0, 10f);
+
+            buttonBar.add(employeesDashboardButton).width(200f);
+            buttonBar.add(marketDashboardButton).width(200f);
+            buttonBar.add(productionDashboardButton).width(200f);
+
+        root.row();
+        root.add(buttonBar).pad(10f, 0, 10f, 0);
+
+        stage.addActor(root);
     }
 
     @Override
@@ -98,5 +112,10 @@ public class GameScreen implements Screen, GameStateListener {
     @Override
     public void updateMoney(GameState gameState) {
 
+    }
+
+    @Override
+    public void employeesListChanged() {
+        /* do nothing */
     }
 }
