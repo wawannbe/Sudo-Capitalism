@@ -531,4 +531,4 @@ classDiagram
 [![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/80x15.png)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 The code is under the AGPL v3 license.
-All the assets of the game are under the CC BY-NC license.
+All the assets of the game are under the CC BY-NC license, except the UI Skin as it's not made by me.
