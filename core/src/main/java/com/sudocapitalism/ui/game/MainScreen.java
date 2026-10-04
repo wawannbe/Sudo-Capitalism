@@ -37,38 +37,46 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
+
+        // ---< Root container to hold the different sections >---
+
         Table root = new Table();
         root.setFillParent(true);
-        root.setDebug(true);
+        root.setDebug(false);
         root.defaults().expandX();
+
+
+        // ---< Top bar of the screens >---
 
         Table topBar = new Table();
 
-            Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
+        Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
 
-            topBar.add(companyName).top().center().colspan(3);
+        topBar.add(companyName).top().center().colspan(3);
 
-        root.add(topBar).pad(10f, 0, 10f, 0);
-        root.row();
+        root.add(topBar).pad(10f, 0, 10f, 0).row();
 
+
+        // ---< Center part of the screen >---
 
         Table dashboard = new Table();
-        root.add(dashboard).expand();
+        root.add(dashboard).expand().row();
 
+
+        // ---< Bottom navigation bar >---
 
         Table buttonBar = new Table();
 
-            TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
-            TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
-            TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
+        TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
+        TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
+        TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
 
-            buttonBar.defaults().pad(0, 10f, 0, 10f);
+        buttonBar.defaults().pad(0, 10f, 0, 10f);
 
-            buttonBar.add(employeesDashboardButton).width(200f);
-            buttonBar.add(marketDashboardButton).width(200f);
-            buttonBar.add(productionDashboardButton).width(200f);
+        buttonBar.add(employeesDashboardButton).width(200f);
+        buttonBar.add(marketDashboardButton).width(200f);
+        buttonBar.add(productionDashboardButton).width(200f);
 
-        root.row();
         root.add(buttonBar).pad(10f, 0, 10f, 0);
 
         stage.addActor(root);

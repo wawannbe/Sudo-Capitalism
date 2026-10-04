@@ -90,7 +90,7 @@ public class NewGameScreen implements Screen {
         });
 
 
-        // ---< Back button >---p
+        // ---< Back button >---
 
         Button backButton = new TextButton("Back", main.uiSkin);
         backButton.addListener(new ChangeListener() {

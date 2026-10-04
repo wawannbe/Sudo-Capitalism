@@ -12,26 +12,49 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
 
+
+/**
+ * The main entry point for the game, displaying a menu with options to start playing, access settings, or exit the application.
+ * This screen handles input routing via a Stage and manages transitions between different game screens.
+ *
+ * @author Elmouu
+ */
 public class HomeScreen implements Screen {
 
+    // The main shared between all screens
     private final Main main;
 
     private Stage stage;
 
+    /**
+     * Constructs a new {@code HomeScreen} with the provided {@link Main} instance.
+     * The screen will be initialized when {@link #show()} is called.
+     *
+     * @param main the main game controller used to switch screens and access shared resources.
+     */
     public HomeScreen(Main main) {
         this.main = main;
     }
 
+    /**
+     * Initializes the screen: creates a Stage with a full-screen viewport, sets up the input processor,
+     * and builds a menu table containing three buttons (Start, Options, Exit). Each button is wired
+     * to navigate to its respective target screen or terminate the application.
+     */
     @Override
     public void show() {
+
+        // ---< Setup >---
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.setFillParent(true);
+        Table root = new Table();
+        root.setFillParent(true);
+        root.setDebug(false);
 
-        table.setDebug(false);
+
+        // ---< Buttons >---
 
         Button startButton = new TextButton("Start", main.uiSkin);
         startButton.addListener(new ChangeListener() {
@@ -57,16 +80,21 @@ public class HomeScreen implements Screen {
             }
         });
 
-        table.defaults().width(100f).padBottom(10f);
-        table.add(startButton);
-        table.row();
-        table.add(optionsButton);
-        table.row();
-        table.add(exitButton);
 
-        stage.addActor(table);
+        // ---< Filling the table >---
+
+        root.defaults().width(100f).padBottom(10f);     // Default width & padding for each button
+
+        root.add(startButton).row();
+        root.add(optionsButton).row();
+        root.add(exitButton);
+
+        stage.addActor(root);
     }
 
+    /**
+     * Renders the screen. Clears the viewport with the game's background color and updates/draws the Stage.
+     */
     @Override
     public void render(float delta) {
 
@@ -76,6 +104,9 @@ public class HomeScreen implements Screen {
         stage.draw();
     }
 
+    /**
+     * Adjusts the viewport size when the device is resized, ensuring the UI remains properly scaled.
+     */
     @Override
     public void resize(int width, int height) {
 
@@ -97,6 +128,9 @@ public class HomeScreen implements Screen {
 
     }
 
+    /**
+     * Releases resources associated with this screen, primarily disposing of the Stage to prevent memory leaks.
+     */
     @Override
     public void dispose() {
         stage.dispose();

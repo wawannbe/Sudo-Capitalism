@@ -17,6 +17,8 @@ import java.util.Scanner;
  * Represents the overall state of a game session.
  * This class orchestrates the core components: the {@link Player}, their {@link Company}, the {@link Economy}, and {@link Reputation} system.
  * It also manages event listeners to notify other parts of the application when significant changes occur (e.g., money updates).
+ *
+ * @author Elmouu
  */
 public class GameState {
 

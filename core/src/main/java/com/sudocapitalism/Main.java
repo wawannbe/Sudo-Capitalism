@@ -17,7 +17,7 @@ import java.util.Map;
 public class Main extends Game {
 
     public Skin uiSkin;
-    private final Color backgroundColor = Color.ROYAL;
+    public Color backgroundColor = Color.OLIVE;
 
     private Map<String, Screen> screenList;
 
@@ -46,10 +46,6 @@ public class Main extends Game {
         gameState.addListener(gameScreen);
         screenList.put("MainScreen", new MainScreen(this, gameState));
         gameState.getPlayerCompany().addListener(gameScreen);
-
-//        DebugScreen debugScreen = new DebugScreen(this, gameState);
-//        gameState.addListener(debugScreen);
-//        screenList.put("DebugScreen", debugScreen);
 
         setScreen(screenList.get("HomeScreen"));
     }

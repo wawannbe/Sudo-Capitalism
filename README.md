@@ -476,6 +476,11 @@ classDiagram
 
 ## Changelog
 
+**v0.1.6**
+
+- Removed hardcoded values selection in the SelectBox of the `OptionsScreen` class for a dynamic approach.
+- Added documentation to `ColorWrapper`, `CompanyListener` and `GameStateListener`.
+
 **v0.1.5**
 
 - The UI now uses [Raymond Buckley's Particle Park UI Skin](https://ray3k.wordpress.com/particle-park-ui-skin-for-scene2d-ui/).
