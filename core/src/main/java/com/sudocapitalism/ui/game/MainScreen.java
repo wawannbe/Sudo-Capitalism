@@ -2,12 +2,14 @@ package com.sudocapitalism.ui.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
@@ -38,6 +40,8 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         Gdx.input.setInputProcessor(stage);
 
 
+
+
         // ---< Root container to hold the different sections >---
 
         Table root = new Table();
@@ -49,10 +53,11 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         // ---< Top bar of the screens >---
 
         Table topBar = new Table();
+        topBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
 
         Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
 
-        topBar.add(companyName).top().center().colspan(3);
+        topBar.add(companyName).top().center().pad(10f, 10f, 10f, 10f);
 
         root.add(topBar).pad(10f, 0, 10f, 0).row();
 
@@ -60,18 +65,21 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         // ---< Center part of the screen >---
 
         Table dashboard = new Table();
-        root.add(dashboard).expand().row();
+        dashboard.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
+
+        root.add(dashboard).expand().fill().pad(0, 10f, 0, 10f).row();
 
 
         // ---< Bottom navigation bar >---
 
         Table buttonBar = new Table();
+        buttonBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
 
         TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
         TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
         TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
 
-        buttonBar.defaults().pad(0, 10f, 0, 10f);
+        buttonBar.defaults().pad(10f, 10f, 10f, 10f);
 
         buttonBar.add(employeesDashboardButton).width(200f);
         buttonBar.add(marketDashboardButton).width(200f);

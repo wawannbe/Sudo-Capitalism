@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.1.7**
+
+- Changed the UI of the game.
+
 **v0.1.6**
 
 - Removed hardcoded values selection in the SelectBox of the `OptionsScreen` class for a dynamic approach.
