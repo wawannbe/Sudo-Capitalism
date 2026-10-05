@@ -4,10 +4,11 @@ import com.sudocapitalism.character.Genre;
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.Player;
 import com.sudocapitalism.company.Company;
-import com.sudocapitalism.gameState.Economy.Economy;
-import com.sudocapitalism.gameState.Reputation.Reputation;
+import com.sudocapitalism.gameState.economy.Economy;
+import com.sudocapitalism.gameState.reputation.Reputation;
+import com.sudocapitalism.gameState.time.Time;
+import com.sudocapitalism.gameState.time.TimeListener;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,6 +29,8 @@ public class GameState {
     /** Listeners that will be notified of state changes. */
     private final ArrayList<GameStateListener> listeners;
 
+    private final Time time;
+
     /** The economic system governing resources, production, and costs. Initialized with the player's company. */
     private final Economy economy;
 
@@ -35,7 +38,7 @@ public class GameState {
     private final Reputation reputation;
 
     /** The company owned and operated by the current player. */
-    private final Company playerCompany;
+    private final Company company;
 
     /** The active player character controlling the game session. */
     private final Player player;
@@ -54,10 +57,12 @@ public class GameState {
 
         this.listeners = new ArrayList<>();
 
-        this.playerCompany = new Company();
+        this.time = new Time();
 
-        this.economy = new Economy(this.playerCompany);
-        this.reputation = new Reputation(this.playerCompany);
+        this.company = new Company();
+
+        this.economy = new Economy(this.company);
+        this.reputation = new Reputation(this.company);
 
         this.player = new Player();
 
@@ -65,7 +70,7 @@ public class GameState {
     }
 
 
-    // ---< Listeners >
+    // ----------< Listeners >----------
 
     /**
      * Registers a listener to be notified of state changes.
@@ -84,8 +89,21 @@ public class GameState {
         this.listeners.remove(listener);
     }
 
+    // ---< Notify >---
 
-    // ---< Player >
+
+    // ----------< Time >----------
+
+    public int getWeek() {
+        return this.time.getWeek();
+    }
+
+    public void nextWeek() {
+        this.time.nextWeek();
+    }
+
+
+    // ----------< Player >----------
 
     /**
      * Retrieves the current player character.
@@ -96,14 +114,14 @@ public class GameState {
     }
 
 
-    // ---< Company >
+    // ----------< Company >----------
 
     /**
      * Retrieves the company associated with this game state (owned by the player).
      * @return The {@link Company} instance.
      */
-    public Company getPlayerCompany() {
-        return playerCompany;
+    public Company getCompany() {
+        return company;
     }
 
     /**
@@ -111,8 +129,7 @@ public class GameState {
      * @param amount The amount of money to be added.
      */
     public void addMoney(double amount) {
-        this.playerCompany.addMoney(amount);
-        this.notifyMoneyChanged();
+        this.company.addMoney(amount);
     }
 
     /**
@@ -120,23 +137,11 @@ public class GameState {
      * @param amount The amount of money to be removed.
      */
     public void spendMoney(double amount) {
-        this.playerCompany.spendMoney(amount);
-        this.notifyMoneyChanged();
-    }
-
-    /**
-     * Notifies the listeners that player's money has changed.
-     * This enables to refresh the Labels displaying the money of the {@link Company}.
-     */
-    public void notifyMoneyChanged() {
-
-        for (GameStateListener listener : this.listeners) {
-            listener.updateMoney(this);
-        }
+        this.company.spendMoney(amount);
     }
 
 
-    // ---< Economy >---
+    // ----------< Economy >----------
 
     /**
      * Retrieves the {@link Economy} instance used in this GameState.
@@ -147,7 +152,7 @@ public class GameState {
     }
 
 
-    // ---< Reputation >---
+    // ----------< Reputation >----------
 
     /**
      * Retrieves the {@link Reputation} instance used in this GameState.
@@ -158,7 +163,7 @@ public class GameState {
     }
 
 
-    // ---< People >---
+    // ----------< People >----------
 
     public ArrayList<Person> initPeople() {
 

@@ -1,12 +1,12 @@
-package com.sudocapitalism.gameState.Reputation;
+package com.sudocapitalism.gameState.economy;
 
 import com.sudocapitalism.company.Company;
 
-public class Reputation {
+public class Economy {
 
     private final Company playerCompany;
 
-    public Reputation(Company playerCompany) {
+    public Economy(Company playerCompany) {
         this.playerCompany = playerCompany;
     }
 

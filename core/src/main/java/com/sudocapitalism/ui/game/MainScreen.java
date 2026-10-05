@@ -3,21 +3,18 @@ package com.sudocapitalism.ui.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
-import com.sudocapitalism.company.CompanyListener;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
+import com.sudocapitalism.gameState.time.TimeListener;
 
-public class MainScreen implements Screen, GameStateListener, CompanyListener {
+public class MainScreen implements Screen {
 
     private final Main main;
 
@@ -53,11 +50,14 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         // ---< Top bar of the screens >---
 
         Table topBar = new Table();
+        topBar.defaults().pad(10f, 10f, 10f, 10f);
         topBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
 
-        Label companyName = new Label(gameState.getPlayerCompany().getName(), main.uiSkin);
+        Label companyName = new Label(gameState.getCompany().getName(), main.uiSkin);
+        Label week = new Label(String.format("Week %d", gameState.getWeek()), main.uiSkin);
 
-        topBar.add(companyName).top().center().pad(10f, 10f, 10f, 10f);
+        topBar.add(week).left();
+        topBar.add(companyName).center();
 
         root.add(topBar).pad(10f, 0, 10f, 0).row();
 
@@ -65,7 +65,18 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
         // ---< Center part of the screen >---
 
         Table dashboard = new Table();
-        dashboard.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
+
+        TextButton nextWeekButton = new TextButton("start next week", main.uiSkin);
+        nextWeekButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameState.nextWeek();
+                week.setText(String.format("Week %d", gameState.getWeek()));
+            }
+        });
+
+        dashboard.add(nextWeekButton);
+
 
         root.add(dashboard).expand().fill().pad(0, 10f, 0, 10f).row();
 
@@ -123,15 +134,5 @@ public class MainScreen implements Screen, GameStateListener, CompanyListener {
     @Override
     public void dispose() {
         stage.dispose();
-    }
-
-    @Override
-    public void updateMoney(GameState gameState) {
-
-    }
-
-    @Override
-    public void employeesListChanged() {
-        /* do nothing */
     }
 }
