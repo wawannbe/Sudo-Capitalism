@@ -476,6 +476,11 @@ classDiagram
 
 ## Changelog
 
+**v0.2.0**
+
+- Major code refactoring.
+- Removed unnecessary listeners.
+
 **v0.1.7**
 
 - Changed the UI of the game.
