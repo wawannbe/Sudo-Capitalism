@@ -9,217 +9,6 @@ This is now the second iteration of the game in Java.
 
 The game is using [LibGDX](https://libgdx.com/) to run.
 
-## Project structure
-
-```
-.
-├── assets
-│   ├── assets.txt
-│   ├── libgdx.png
-│   └── ui
-│       ├── font.fnt
-│       ├── font-list.fnt
-│       ├── font-subtitle.fnt
-│       ├── font-window.fnt
-│       ├── Particle Park UI.atlas
-│       ├── Particle Park UI.json
-│       └── Particle Park UI.png
-├── build
-│   └── reports
-│       └── problems
-│           └── problems-report.html
-├── build.gradle
-├── core
-│   ├── build
-│   │   ├── classes
-│   │   │   └── java
-│   │   │       └── main
-│   │   │           └── com
-│   │   │               └── sudocapitalism
-│   │   │                   ├── character
-│   │   │                   │   ├── Genre.class
-│   │   │                   │   ├── Person.class
-│   │   │                   │   ├── Player.class
-│   │   │                   │   └── worker
-│   │   │                   │       ├── InventoryManager.class
-│   │   │                   │       ├── MarketingManager.class
-│   │   │                   │       ├── ProductionManager.class
-│   │   │                   │       └── Worker.class
-│   │   │                   ├── company
-│   │   │                   │   ├── Company.class
-│   │   │                   │   └── CompanyListener.class
-│   │   │                   ├── gameState
-│   │   │                   │   ├── Economy
-│   │   │                   │   │   └── Economy.class
-│   │   │                   │   ├── GameState.class
-│   │   │                   │   ├── GameStateListener.class
-│   │   │                   │   └── Reputation
-│   │   │                   │       └── Reputation.class
-│   │   │                   ├── item
-│   │   │                   │   ├── consumable
-│   │   │                   │   │   ├── Consumable.class
-│   │   │                   │   │   └── ConsumableType.class
-│   │   │                   │   ├── Effect.class
-│   │   │                   │   └── Item.class
-│   │   │                   ├── Main.class
-│   │   │                   └── ui
-│   │   │                       ├── game
-│   │   │                       │   ├── DebugScreen$1.class
-│   │   │                       │   ├── DebugScreen$2.class
-│   │   │                       │   ├── DebugScreen.class
-│   │   │                       │   └── MainScreen.class
-│   │   │                       └── menu
-│   │   │                           ├── HomeScreen$1.class
-│   │   │                           ├── HomeScreen$2.class
-│   │   │                           ├── HomeScreen$3.class
-│   │   │                           ├── HomeScreen.class
-│   │   │                           ├── LoadScreen$1.class
-│   │   │                           ├── LoadScreen$2.class
-│   │   │                           ├── LoadScreen$3.class
-│   │   │                           ├── LoadScreen.class
-│   │   │                           ├── NewGameScreen$1.class
-│   │   │                           ├── NewGameScreen$2.class
-│   │   │                           ├── NewGameScreen.class
-│   │   │                           └── OptionsScreen.class
-│   │   ├── generated
-│   │   │   └── sources
-│   │   │       ├── annotationProcessor
-│   │   │       │   └── java
-│   │   │       │       └── main
-│   │   │       └── headers
-│   │   │           └── java
-│   │   │               └── main
-│   │   ├── libs
-│   │   │   └── core-1.0.0.jar
-│   │   └── tmp
-│   │       ├── compileJava
-│   │       │   ├── compileTransaction
-│   │       │   │   ├── backup-dir
-│   │       │   │   └── stash-dir
-│   │       │   │       ├── Main.class.uniqueId0
-│   │       │   │       └── MainScreen.class.uniqueId1
-│   │       │   └── previous-compilation-data.bin
-│   │       └── jar
-│   │           └── MANIFEST.MF
-│   ├── build.gradle
-│   └── src
-│       └── main
-│           └── java
-│               └── com
-│                   └── sudocapitalism
-│                       ├── character
-│                       │   ├── Genre.java
-│                       │   ├── Person.java
-│                       │   ├── Player.java
-│                       │   └── worker
-│                       │       ├── InventoryManager.java
-│                       │       ├── MarketingManager.java
-│                       │       ├── ProductionManager.java
-│                       │       └── Worker.java
-│                       ├── company
-│                       │   ├── Company.java
-│                       │   └── CompanyListener.java
-│                       ├── gameState
-│                       │   ├── Economy
-│                       │   │   └── Economy.java
-│                       │   ├── GameState.java
-│                       │   ├── GameStateListener.java
-│                       │   └── Reputation
-│                       │       └── Reputation.java
-│                       ├── item
-│                       │   ├── consumable
-│                       │   │   ├── Consumable.java
-│                       │   │   └── ConsumableType.java
-│                       │   ├── Effect.java
-│                       │   ├── equipment
-│                       │   │   ├── clothing
-│                       │   │   └── tool
-│                       │   └── Item.java
-│                       ├── Main.java
-│                       └── ui
-│                           ├── game
-│                           │   ├── DebugScreen.java
-│                           │   └── MainScreen.java
-│                           └── menu
-│                               ├── HomeScreen.java
-│                               ├── LoadScreen.java
-│                               ├── NewGameScreen.java
-│                               └── OptionsScreen.java
-├── gradle
-│   ├── gradle-daemon-jvm.properties
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── gradle.properties
-├── gradlew
-├── gradlew.bat
-├── LICENSE
-├── lwjgl3
-│   ├── build
-│   │   ├── classes
-│   │   │   └── java
-│   │   │       └── main
-│   │   │           └── com
-│   │   │               └── sudocapitalism
-│   │   │                   └── lwjgl3
-│   │   │                       ├── Lwjgl3Launcher.class
-│   │   │                       └── StartupHelper.class
-│   │   ├── generated
-│   │   │   └── sources
-│   │   │       ├── annotationProcessor
-│   │   │       │   └── java
-│   │   │       │       └── main
-│   │   │       └── headers
-│   │   │           └── java
-│   │   │               └── main
-│   │   ├── resources
-│   │   │   └── main
-│   │   │       ├── assets.txt
-│   │   │       ├── atlas
-│   │   │       ├── data
-│   │   │       │   └── people.csv
-│   │   │       ├── libgdx128.png
-│   │   │       ├── libgdx16.png
-│   │   │       ├── libgdx32.png
-│   │   │       ├── libgdx64.png
-│   │   │       ├── libgdx.png
-│   │   │       └── ui
-│   │   │           ├── expeeui
-│   │   │           ├── font.fnt
-│   │   │           ├── font-list.fnt
-│   │   │           ├── font-subtitle.fnt
-│   │   │           ├── font-window.fnt
-│   │   │           ├── Particle Park UI.atlas
-│   │   │           ├── Particle Park UI.json
-│   │   │           └── Particle Park UI.png
-│   │   └── tmp
-│   │       └── compileJava
-│   │           └── previous-compilation-data.bin
-│   ├── build.gradle
-│   ├── icons
-│   │   ├── logo.icns
-│   │   ├── logo.ico
-│   │   └── logo.png
-│   ├── nativeimage.gradle
-│   └── src
-│       └── main
-│           ├── java
-│           │   └── com
-│           │       └── sudocapitalism
-│           │           └── lwjgl3
-│           │               ├── Lwjgl3Launcher.java
-│           │               └── StartupHelper.java
-│           └── resources
-│               ├── data
-│               │   └── people.csv
-│               ├── libgdx128.png
-│               ├── libgdx16.png
-│               ├── libgdx32.png
-│               └── libgdx64.png
-├── README.md
-└── settings.gradle
-```
-
 ## Class diagram
 
 ```mermaid
@@ -446,7 +235,7 @@ classDiagram
 
     Main --|> Game
     
-    Main --> "*" Screen : -screenList
+    Main --> Screen : * -screenList
     Screen <|.. MainScreen
     Screen <|.. LoadScreen
     Screen <|.. OptionsScreen
@@ -454,24 +243,235 @@ classDiagram
     Screen <|.. GameScreen
     Screen <|.. NewGameScreen
     
-    Genre --> "1" Person :  #genre
+    Genre --> Person :  1 #genre
     Player <|-- Person
     Worker <|-- Person
 
-    Company "1" <-- Reputation : -playerCompany
-    Company "1" <-- Economy : -playerCompany
+    Company <-- Reputation : 1 -playerCompany
+    Company <-- Economy : 1 -playerCompany
 
-    GameStateListener --> "*" GameState : -listeners
-    GameState --> "1" Economy : -economy
-    GameState --> "1" Reputation : -reputation
-    GameState --> "1" Company : -playerCompany
-    GameState --> "1" Player : -player
+    GameStateListener --> GameState : * -listeners
+    GameState --> Economy : 1 -economy
+    GameState --> Reputation : 1 -reputation
+    GameState --> Company : 1 -playerCompany
+    GameState --> Player : 1 -player
     
-    Main --> GameState : -gameState
+    Main --> GameState : 1 -gameState
 
     Item <|-- Consumable
-    Consumable --> "1" ConsumableType : #consumableType
-    Consumable --> "1" Effect : #effect
+    Consumable --> ConsumableType : 1 #consumableType
+    Consumable --> Effect : 1 #effect
+```
+
+## Project structure
+
+```
+.
+├── assets
+│   ├── assets.txt
+│   ├── libgdx.png
+│   └── ui
+│       ├── font.fnt
+│       ├── font-list.fnt
+│       ├── font-subtitle.fnt
+│       ├── font-window.fnt
+│       ├── Particle Park UI.atlas
+│       ├── Particle Park UI.json
+│       └── Particle Park UI.png
+├── build
+│   └── reports
+│       └── problems
+│           └── problems-report.html
+├── build.gradle
+├── core
+│   ├── build
+│   │   ├── classes
+│   │   │   └── java
+│   │   │       └── main
+│   │   │           └── com
+│   │   │               └── sudocapitalism
+│   │   │                   ├── character
+│   │   │                   │   ├── Genre.class
+│   │   │                   │   ├── Person.class
+│   │   │                   │   ├── Player.class
+│   │   │                   │   └── worker
+│   │   │                   │       ├── InventoryManager.class
+│   │   │                   │       ├── MarketingManager.class
+│   │   │                   │       ├── ProductionManager.class
+│   │   │                   │       └── Worker.class
+│   │   │                   ├── company
+│   │   │                   │   ├── Company.class
+│   │   │                   │   └── CompanyListener.class
+│   │   │                   ├── gameState
+│   │   │                   │   ├── Economy
+│   │   │                   │   │   └── Economy.class
+│   │   │                   │   ├── GameState.class
+│   │   │                   │   ├── GameStateListener.class
+│   │   │                   │   └── Reputation
+│   │   │                   │       └── Reputation.class
+│   │   │                   ├── item
+│   │   │                   │   ├── consumable
+│   │   │                   │   │   ├── Consumable.class
+│   │   │                   │   │   └── ConsumableType.class
+│   │   │                   │   ├── Effect.class
+│   │   │                   │   └── Item.class
+│   │   │                   ├── Main.class
+│   │   │                   └── ui
+│   │   │                       ├── game
+│   │   │                       │   ├── DebugScreen$1.class
+│   │   │                       │   ├── DebugScreen$2.class
+│   │   │                       │   ├── DebugScreen.class
+│   │   │                       │   └── MainScreen.class
+│   │   │                       └── menu
+│   │   │                           ├── HomeScreen$1.class
+│   │   │                           ├── HomeScreen$2.class
+│   │   │                           ├── HomeScreen$3.class
+│   │   │                           ├── HomeScreen.class
+│   │   │                           ├── LoadScreen$1.class
+│   │   │                           ├── LoadScreen$2.class
+│   │   │                           ├── LoadScreen$3.class
+│   │   │                           ├── LoadScreen.class
+│   │   │                           ├── NewGameScreen$1.class
+│   │   │                           ├── NewGameScreen$2.class
+│   │   │                           ├── NewGameScreen.class
+│   │   │                           └── OptionsScreen.class
+│   │   ├── generated
+│   │   │   └── sources
+│   │   │       ├── annotationProcessor
+│   │   │       │   └── java
+│   │   │       │       └── main
+│   │   │       └── headers
+│   │   │           └── java
+│   │   │               └── main
+│   │   ├── libs
+│   │   │   └── core-1.0.0.jar
+│   │   └── tmp
+│   │       ├── compileJava
+│   │       │   ├── compileTransaction
+│   │       │   │   ├── backup-dir
+│   │       │   │   └── stash-dir
+│   │       │   │       ├── Main.class.uniqueId0
+│   │       │   │       └── MainScreen.class.uniqueId1
+│   │       │   └── previous-compilation-data.bin
+│   │       └── jar
+│   │           └── MANIFEST.MF
+│   ├── build.gradle
+│   └── src
+│       └── main
+│           └── java
+│               └── com
+│                   └── sudocapitalism
+│                       ├── character
+│                       │   ├── Genre.java
+│                       │   ├── Person.java
+│                       │   ├── Player.java
+│                       │   └── worker
+│                       │       ├── InventoryManager.java
+│                       │       ├── MarketingManager.java
+│                       │       ├── ProductionManager.java
+│                       │       └── Worker.java
+│                       ├── company
+│                       │   ├── Company.java
+│                       │   └── CompanyListener.java
+│                       ├── gameState
+│                       │   ├── Economy
+│                       │   │   └── Economy.java
+│                       │   ├── GameState.java
+│                       │   ├── GameStateListener.java
+│                       │   └── Reputation
+│                       │       └── Reputation.java
+│                       ├── item
+│                       │   ├── consumable
+│                       │   │   ├── Consumable.java
+│                       │   │   └── ConsumableType.java
+│                       │   ├── Effect.java
+│                       │   ├── equipment
+│                       │   │   ├── clothing
+│                       │   │   └── tool
+│                       │   └── Item.java
+│                       ├── Main.java
+│                       └── ui
+│                           ├── game
+│                           │   ├── DebugScreen.java
+│                           │   └── MainScreen.java
+│                           └── menu
+│                               ├── HomeScreen.java
+│                               ├── LoadScreen.java
+│                               ├── NewGameScreen.java
+│                               └── OptionsScreen.java
+├── gradle
+│   ├── gradle-daemon-jvm.properties
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── LICENSE
+├── lwjgl3
+│   ├── build
+│   │   ├── classes
+│   │   │   └── java
+│   │   │       └── main
+│   │   │           └── com
+│   │   │               └── sudocapitalism
+│   │   │                   └── lwjgl3
+│   │   │                       ├── Lwjgl3Launcher.class
+│   │   │                       └── StartupHelper.class
+│   │   ├── generated
+│   │   │   └── sources
+│   │   │       ├── annotationProcessor
+│   │   │       │   └── java
+│   │   │       │       └── main
+│   │   │       └── headers
+│   │   │           └── java
+│   │   │               └── main
+│   │   ├── resources
+│   │   │   └── main
+│   │   │       ├── assets.txt
+│   │   │       ├── atlas
+│   │   │       ├── data
+│   │   │       │   └── people.csv
+│   │   │       ├── libgdx128.png
+│   │   │       ├── libgdx16.png
+│   │   │       ├── libgdx32.png
+│   │   │       ├── libgdx64.png
+│   │   │       ├── libgdx.png
+│   │   │       └── ui
+│   │   │           ├── expeeui
+│   │   │           ├── font.fnt
+│   │   │           ├── font-list.fnt
+│   │   │           ├── font-subtitle.fnt
+│   │   │           ├── font-window.fnt
+│   │   │           ├── Particle Park UI.atlas
+│   │   │           ├── Particle Park UI.json
+│   │   │           └── Particle Park UI.png
+│   │   └── tmp
+│   │       └── compileJava
+│   │           └── previous-compilation-data.bin
+│   ├── build.gradle
+│   ├── icons
+│   │   ├── logo.icns
+│   │   ├── logo.ico
+│   │   └── logo.png
+│   ├── nativeimage.gradle
+│   └── src
+│       └── main
+│           ├── java
+│           │   └── com
+│           │       └── sudocapitalism
+│           │           └── lwjgl3
+│           │               ├── Lwjgl3Launcher.java
+│           │               └── StartupHelper.java
+│           └── resources
+│               ├── data
+│               │   └── people.csv
+│               ├── libgdx128.png
+│               ├── libgdx16.png
+│               ├── libgdx32.png
+│               └── libgdx64.png
+├── README.md
+└── settings.gradle
 ```
 
 ## Changelog
