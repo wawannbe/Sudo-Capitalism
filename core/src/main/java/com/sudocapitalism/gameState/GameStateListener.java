@@ -7,5 +7,5 @@ package com.sudocapitalism.gameState;
  */
 public interface GameStateListener {
 
-
+    default public void weekHasChanged(GameState gameState) {}
 }

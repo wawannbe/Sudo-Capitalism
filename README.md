@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.6**
+
+- The UI refactor has progressed with the `SideBar` class.
+
 **v0.2.5**
 
 - Replaced public attributes `main.uiSkin` and `main.backgroundColor` with proper getters and setters.

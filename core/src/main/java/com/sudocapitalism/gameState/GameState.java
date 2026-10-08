@@ -91,6 +91,11 @@ public class GameState {
 
     // ---< Notify >---
 
+    public void notifyWeekHasChanged() {
+        for (GameStateListener listener : this.listeners) {
+            listener.weekHasChanged(this);
+        }
+    }
 
     // ----------< Time >----------
 
@@ -100,6 +105,7 @@ public class GameState {
 
     public void nextWeek() {
         this.time.nextWeek();
+        notifyWeekHasChanged();
     }
 
 

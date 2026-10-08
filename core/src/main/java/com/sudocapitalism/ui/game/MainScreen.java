@@ -13,6 +13,7 @@ import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
 import com.sudocapitalism.gameState.time.TimeListener;
+import com.sudocapitalism.ui.game.layout.SideBar;
 import com.sudocapitalism.ui.game.layout.TopBar;
 
 public class MainScreen implements Screen {
@@ -56,27 +57,11 @@ public class MainScreen implements Screen {
 
         // ---< Center part of the screen >---
 
-        Table buttonGroup = new Table();
-
-        TextButton employeesDashboardButton = new TextButton("Manage employees", main.getUiSkin());
-        TextButton marketDashboardButton = new TextButton("Manage market", main.getUiSkin());
-        TextButton productionDashboardButton = new TextButton("Manage products", main.getUiSkin());
-
-        buttonGroup.defaults().width(200f);
-        buttonGroup.add(employeesDashboardButton).row();
-        buttonGroup.add(marketDashboardButton).row();
-        buttonGroup.add(productionDashboardButton);
+        SideBar buttonGroup = new SideBar(main, gameState);
 
         Table dashboard = new Table();
 
-        TextButton nextWeekButton = new TextButton("start next week", main.getUiSkin());
-        nextWeekButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameState.nextWeek();
-                topBar.getWeekLabel().setText(String.format("Week %d", gameState.getWeek()));
-            }
-        });
+
 
         Label productionLevel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.getUiSkin());
 
@@ -94,7 +79,6 @@ public class MainScreen implements Screen {
             }
         });
 
-        dashboard.add(nextWeekButton).row();
         dashboard.add(productionLevel);
         dashboard.add(upgradeProduction);
 
