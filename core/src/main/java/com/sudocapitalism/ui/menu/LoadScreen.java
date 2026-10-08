@@ -35,7 +35,7 @@ public class LoadScreen implements Screen {
 
         table.setDebug(false);
 
-        Button backButton = new TextButton("Back", main.uiSkin);
+        Button backButton = new TextButton("Back", main.getUiSkin());
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -43,7 +43,7 @@ public class LoadScreen implements Screen {
             }
         });
 
-        Button newGameButton = new TextButton("New game", main.uiSkin);
+        Button newGameButton = new TextButton("New game", main.getUiSkin());
         newGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -51,7 +51,7 @@ public class LoadScreen implements Screen {
             }
         });
 
-        Button loadGameButton = new TextButton("Load game", main.uiSkin);
+        Button loadGameButton = new TextButton("Load game", main.getUiSkin());
         loadGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

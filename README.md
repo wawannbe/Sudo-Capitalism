@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.5**
+
+- Replaced public attributes `main.uiSkin` and `main.backgroundColor` with proper getters and setters.
+
 **v0.2.4**
 
 - UI split in smaller tables to make it more modular.

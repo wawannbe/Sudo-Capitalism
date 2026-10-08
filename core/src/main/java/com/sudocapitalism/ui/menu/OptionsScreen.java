@@ -36,16 +36,16 @@ public class OptionsScreen implements Screen  {
         table.setFillParent(true);
         table.setDebug(false);
 
-        Label backgroundColorLabel = new Label("Background color: ", main.uiSkin);
+        Label backgroundColorLabel = new Label("Background color: ", main.getUiSkin());
         table.add(backgroundColorLabel).row();
 
-        SelectBox<String> backgroundColor = new SelectBox<>(main.uiSkin);
+        SelectBox<String> backgroundColor = new SelectBox<>(main.getUiSkin());
         backgroundColor.setItems(ColorWrapper.getColorsList());
 
         backgroundColor.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                main.backgroundColor = ColorWrapper.getColor(backgroundColor.getSelected().toUpperCase());
+                main.setBackgroundColor(ColorWrapper.getColor(backgroundColor.getSelected().toUpperCase()));
             }
         });
 
@@ -54,7 +54,7 @@ public class OptionsScreen implements Screen  {
 
         // ---< Back button >--st
 
-        Button backButton = new TextButton("Back", main.uiSkin);
+        Button backButton = new TextButton("Back", main.getUiSkin());
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

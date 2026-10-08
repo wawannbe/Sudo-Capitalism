@@ -15,12 +15,12 @@ public class TopBar extends Table {
     public TopBar(Main main, GameState gameState) {
 
         this.defaults().pad(10f, 10f, 10f, 10f);
-        this.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
+        this.setBackground(main.getUiSkin().newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
 
-        Label companyNameLabel = new Label(gameState.getCompany().getName(), main.uiSkin);
-        this.companyMoneyLabel = new Label(String.format("%.2f $", gameState.getCompany().getMoney()), main.uiSkin);
+        Label companyNameLabel = new Label(gameState.getCompany().getName(), main.getUiSkin());
+        this.companyMoneyLabel = new Label(String.format("%.2f $", gameState.getCompany().getMoney()), main.getUiSkin());
 
-        this.weekLabel = new Label(String.format("Week %d", gameState.getWeek()), main.uiSkin);
+        this.weekLabel = new Label(String.format("Week %d", gameState.getWeek()), main.getUiSkin());
 
         this.add(companyNameLabel).center();
         this.add(this.companyMoneyLabel).right();

@@ -42,16 +42,16 @@ public class NewGameScreen implements Screen {
 
         // ---< Character creation >---
 
-        Label  nameLabel = new Label("Who are you ?", main.uiSkin);
+        Label  nameLabel = new Label("Who are you ?", main.getUiSkin());
 
-        TextField firstNameField = new TextField("", main.uiSkin);
+        TextField firstNameField = new TextField("", main.getUiSkin());
         firstNameField.setMessageText("ex: John");
 
-        TextField lastNameField = new TextField("", main.uiSkin);
+        TextField lastNameField = new TextField("", main.getUiSkin());
         lastNameField.setMessageText("ex: Doe");
 
-        CheckBox maleGenre = new CheckBox("Male", main.uiSkin);
-        CheckBox femaleGenre = new CheckBox("Female", main.uiSkin);
+        CheckBox maleGenre = new CheckBox("Male", main.getUiSkin());
+        CheckBox femaleGenre = new CheckBox("Female", main.getUiSkin());
         ButtonGroup<CheckBox> genreSelector = new ButtonGroup<>(maleGenre, femaleGenre);
         genreSelector.setMaxCheckCount(1);
         genreSelector.setMinCheckCount(1);
@@ -60,14 +60,14 @@ public class NewGameScreen implements Screen {
 
         // ---< Company creation >---
 
-        Label companyNameLabel = new Label("Enter the name of your company", main.uiSkin);
-        TextField companyNameField = new TextField("", main.uiSkin);
+        Label companyNameLabel = new Label("Enter the name of your company", main.getUiSkin());
+        TextField companyNameField = new TextField("", main.getUiSkin());
         companyNameField.setMessageText("ex: BananaCorp");
 
 
         // ---< Start button >---
 
-        TextButton startButton = new TextButton("Start game", main.uiSkin);
+        TextButton startButton = new TextButton("Start game", main.getUiSkin());
         startButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -90,7 +90,7 @@ public class NewGameScreen implements Screen {
 
         // ---< Back button >---
 
-        Button backButton = new TextButton("Back", main.uiSkin);
+        Button backButton = new TextButton("Back", main.getUiSkin());
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

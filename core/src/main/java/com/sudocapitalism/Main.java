@@ -16,16 +16,25 @@ import java.util.Map;
 
 public class Main extends Game {
 
-    public Skin uiSkin;
-    public Color backgroundColor = Color.ROYAL;
+    private Skin uiSkin;
+    private Color backgroundColor;
 
     private Map<String, Screen> screenList;
 
     public GameState gameState = new GameState();
 
     public Color getBackgroundColor() {
-        return backgroundColor;
+        return this.backgroundColor;
     }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public Skin getUiSkin() {
+        return uiSkin;
+    }
+
 
     public Map<String, Screen> getScreenList() {
         return screenList;
@@ -34,7 +43,8 @@ public class Main extends Game {
     @Override
     public void create() {
 
-        uiSkin = new Skin(Gdx.files.internal("ui/Particle Park UI.json"));
+        this.uiSkin = new Skin(Gdx.files.internal("ui/Particle Park UI.json"));
+        this.backgroundColor = Color.ROYAL;
 
         this.screenList = new HashMap<>();
         screenList.put("HomeScreen", new HomeScreen(this));

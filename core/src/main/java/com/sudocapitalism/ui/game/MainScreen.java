@@ -58,9 +58,9 @@ public class MainScreen implements Screen {
 
         Table buttonGroup = new Table();
 
-        TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
-        TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
-        TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
+        TextButton employeesDashboardButton = new TextButton("Manage employees", main.getUiSkin());
+        TextButton marketDashboardButton = new TextButton("Manage market", main.getUiSkin());
+        TextButton productionDashboardButton = new TextButton("Manage products", main.getUiSkin());
 
         buttonGroup.defaults().width(200f);
         buttonGroup.add(employeesDashboardButton).row();
@@ -69,7 +69,7 @@ public class MainScreen implements Screen {
 
         Table dashboard = new Table();
 
-        TextButton nextWeekButton = new TextButton("start next week", main.uiSkin);
+        TextButton nextWeekButton = new TextButton("start next week", main.getUiSkin());
         nextWeekButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -78,9 +78,9 @@ public class MainScreen implements Screen {
             }
         });
 
-        Label productionLevel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.uiSkin);
+        Label productionLevel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.getUiSkin());
 
-        TextButton upgradeProduction = new TextButton("^", main.uiSkin);
+        TextButton upgradeProduction = new TextButton("^", main.getUiSkin());
         upgradeProduction.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

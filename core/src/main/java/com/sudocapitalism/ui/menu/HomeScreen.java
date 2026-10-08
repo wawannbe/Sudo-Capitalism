@@ -58,7 +58,7 @@ public class HomeScreen implements Screen {
 
         // ---< Buttons >---
 
-        Button startButton = new TextButton("Start", main.uiSkin);
+        Button startButton = new TextButton("Start", main.getUiSkin());
         startButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -66,7 +66,7 @@ public class HomeScreen implements Screen {
             }
         });
 
-        Button optionsButton = new TextButton("options", main.uiSkin);
+        Button optionsButton = new TextButton("Options", main.getUiSkin());
         optionsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -74,7 +74,7 @@ public class HomeScreen implements Screen {
             }
         });
 
-        Button exitButton = new TextButton("Exit", main.uiSkin);
+        Button exitButton = new TextButton("Exit", main.getUiSkin());
         exitButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
