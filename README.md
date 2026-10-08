@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.1**
+
+- Added a base of the production system to the company.
+
 **v0.2.0**
 
 - Major code refactoring.

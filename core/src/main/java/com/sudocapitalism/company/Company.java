@@ -2,6 +2,9 @@ package com.sudocapitalism.company;
 
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.worker.Worker;
+import com.sudocapitalism.gameState.production.Product;
+import com.sudocapitalism.gameState.production.Production;
+
 import java.util.ArrayList;
 
 
@@ -25,6 +28,7 @@ public class Company {
     /** List of workers employed by this company */
     private final ArrayList<Worker> employees;
 
+    private final Production production;
 
     // ---< Constructor >---
 
@@ -39,6 +43,8 @@ public class Company {
         this.money = 2000.0;
 
         this.employees = new ArrayList<>();
+
+        this.production = new Production();
     }
 
 
@@ -118,6 +124,11 @@ public class Company {
     public void fire(Worker worker) {
         this.employees.remove(worker);
     }
+
+
+    // ---< Production >---
+
+
 
 
     // ---< toString >---
