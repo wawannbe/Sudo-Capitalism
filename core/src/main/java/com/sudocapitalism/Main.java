@@ -17,7 +17,7 @@ import java.util.Map;
 public class Main extends Game {
 
     public Skin uiSkin;
-    public Color backgroundColor = Color.OLIVE;
+    public Color backgroundColor = Color.ROYAL;
 
     private Map<String, Screen> screenList;
 

@@ -13,6 +13,7 @@ import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
 import com.sudocapitalism.gameState.time.TimeListener;
+import com.sudocapitalism.ui.game.layout.TopBar;
 
 public class MainScreen implements Screen {
 
@@ -21,6 +22,8 @@ public class MainScreen implements Screen {
     private final GameState gameState;
 
     private Stage stage;
+
+
 
     public MainScreen(Main main, GameState gameState) {
         this.main = main;
@@ -47,19 +50,7 @@ public class MainScreen implements Screen {
 
         // ---< Top bar of the screens >---
 
-        Table topBar = new Table();
-        topBar.defaults().pad(10f, 10f, 10f, 10f);
-        topBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
-
-        Label companyName = new Label(gameState.getCompany().getName(), main.uiSkin);
-        Label companyMoney = new Label(String.format("%.2f $", gameState.getCompany().getMoney()), main.uiSkin);
-
-        Label week = new Label(String.format("Week %d", gameState.getWeek()), main.uiSkin);
-
-        topBar.add(week).left();
-        topBar.add(companyName).center();
-        topBar.add(companyMoney).right();
-
+        TopBar topBar = new TopBar(main, gameState);
         root.add(topBar).pad(10f, 0, 10f, 0).row();
 
 
@@ -72,7 +63,7 @@ public class MainScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameState.nextWeek();
-                week.setText(String.format("Week %d", gameState.getWeek()));
+                topBar.getWeekLabel().setText(String.format("Week %d", gameState.getWeek()));
             }
         });
 
@@ -84,7 +75,7 @@ public class MainScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 gameState.getCompany().upgradeProduction();
                 productionLevel.setText(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()));
-                companyMoney.setText(String.format("%.2f $", gameState.getCompany().getMoney()));
+                topBar.getCompanyMoneyLabel().setText(String.format("%.2f $", gameState.getCompany().getMoney()));
 
                 if (gameState.getCompany().getProductionLevel() == 10) {
                     upgradeProduction.setText("Max level !");

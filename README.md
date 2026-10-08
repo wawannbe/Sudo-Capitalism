@@ -476,6 +476,11 @@ classDiagram
 
 ## Changelog
 
+**v0.2.3**
+
+- The UI is undergoing a refactor to make it cleaner.
+- A `TopBar` class has been added
+
 **v0.2.2**
 
 - The production leveling system is now working.
