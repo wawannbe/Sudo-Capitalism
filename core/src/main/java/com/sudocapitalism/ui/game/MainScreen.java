@@ -56,6 +56,17 @@ public class MainScreen implements Screen {
 
         // ---< Center part of the screen >---
 
+        Table buttonGroup = new Table();
+
+        TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
+        TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
+        TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
+
+        buttonGroup.defaults().width(200f);
+        buttonGroup.add(employeesDashboardButton).row();
+        buttonGroup.add(marketDashboardButton).row();
+        buttonGroup.add(productionDashboardButton);
+
         Table dashboard = new Table();
 
         TextButton nextWeekButton = new TextButton("start next week", main.uiSkin);
@@ -87,26 +98,15 @@ public class MainScreen implements Screen {
         dashboard.add(productionLevel);
         dashboard.add(upgradeProduction);
 
+        ScrollPane scrollPane = new ScrollPane(dashboard);
 
-        root.add(dashboard).expand().fill().pad(0, 10f, 0, 10f).row();
+        Table window = new Table();
+        window.setDebug(true);
+        window.add(buttonGroup).expandY();
+        window.add(scrollPane).expand();
 
 
-        // ---< Bottom navigation bar >---
-
-        Table buttonBar = new Table();
-        buttonBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
-
-        TextButton employeesDashboardButton = new TextButton("Manage employees", main.uiSkin);
-        TextButton marketDashboardButton = new TextButton("Manage market", main.uiSkin);
-        TextButton productionDashboardButton = new TextButton("Manage products", main.uiSkin);
-
-        buttonBar.defaults().pad(10f, 10f, 10f, 10f);
-
-        buttonBar.add(employeesDashboardButton).width(200f);
-        buttonBar.add(marketDashboardButton).width(200f);
-        buttonBar.add(productionDashboardButton).width(200f);
-
-        root.add(buttonBar).pad(10f, 0, 10f, 0);
+        root.add(window).expand().fill().pad(0, 10f, 0, 10f);
 
         stage.addActor(root);
     }

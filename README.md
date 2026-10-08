@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.4**
+
+- UI split in smaller tables to make it more modular.
+
 **v0.2.3**
 
 - The UI is undergoing a refactor to make it cleaner.
