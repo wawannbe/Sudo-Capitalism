@@ -128,7 +128,16 @@ public class Company {
 
     // ---< Production >---
 
+    public int getProductionLevel() {
+        return this.production.getLevel();
+    }
 
+    public void upgradeProduction() {
+
+        if (this.production.upgradeProduction()) {
+            this.spendMoney(10);
+        }
+    }
 
 
     // ---< toString >---

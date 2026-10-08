@@ -5,9 +5,10 @@ import java.util.Map;
 
 public class Production {
 
+    private static final int MAX_LEVEL = 10;
     private int level;
 
-    private Map<Product, Integer> inventory;
+    private final Map<Product, Integer> inventory;
 
     public Production() {
 
@@ -22,6 +23,20 @@ public class Production {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public boolean upgradeProduction() {
+
+        if (this.level < 10) {
+
+            this.level ++;
+
+            return true;
+
+        } else {
+
+            return false;
+        }
     }
 
     public Map<Product, Integer> getInventory() {

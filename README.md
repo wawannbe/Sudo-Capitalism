@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.2**
+
+- The production leveling system is now working.
+
 **v0.2.1**
 
 - Added a base of the production system to the company.

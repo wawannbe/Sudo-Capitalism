@@ -37,8 +37,6 @@ public class MainScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
 
-
-
         // ---< Root container to hold the different sections >---
 
         Table root = new Table();
@@ -54,10 +52,13 @@ public class MainScreen implements Screen {
         topBar.setBackground(main.uiSkin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
 
         Label companyName = new Label(gameState.getCompany().getName(), main.uiSkin);
+        Label companyMoney = new Label(String.format("%.2f $", gameState.getCompany().getMoney()), main.uiSkin);
+
         Label week = new Label(String.format("Week %d", gameState.getWeek()), main.uiSkin);
 
         topBar.add(week).left();
         topBar.add(companyName).center();
+        topBar.add(companyMoney).right();
 
         root.add(topBar).pad(10f, 0, 10f, 0).row();
 
@@ -75,7 +76,25 @@ public class MainScreen implements Screen {
             }
         });
 
-        dashboard.add(nextWeekButton);
+        Label productionLevel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.uiSkin);
+
+        TextButton upgradeProduction = new TextButton("^", main.uiSkin);
+        upgradeProduction.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameState.getCompany().upgradeProduction();
+                productionLevel.setText(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()));
+                companyMoney.setText(String.format("%.2f $", gameState.getCompany().getMoney()));
+
+                if (gameState.getCompany().getProductionLevel() == 10) {
+                    upgradeProduction.setText("Max level !");
+                }
+            }
+        });
+
+        dashboard.add(nextWeekButton).row();
+        dashboard.add(productionLevel);
+        dashboard.add(upgradeProduction);
 
 
         root.add(dashboard).expand().fill().pad(0, 10f, 0, 10f).row();
