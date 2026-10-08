@@ -91,21 +91,20 @@ public class GameState {
 
     // ---< Notify >---
 
-    public void notifyWeekHasChanged() {
-        for (GameStateListener listener : this.listeners) {
-            listener.weekHasChanged(this);
-        }
-    }
+
 
     // ----------< Time >----------
+
+    public boolean addTimeListener(TimeListener timeListener) {
+        return this.time.addTimeListener(timeListener);
+    }
 
     public int getWeek() {
         return this.time.getWeek();
     }
 
     public void nextWeek() {
-        this.time.nextWeek();
-        notifyWeekHasChanged();
+        this.time.nextWeek(this);
     }
 
 

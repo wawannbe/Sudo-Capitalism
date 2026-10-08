@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.7**
+
+- Listeners are being separated to make the code easier to maintain.
+
 **v0.2.6**
 
 - The UI refactor has progressed with the `SideBar` class.

@@ -1,6 +1,8 @@
 package com.sudocapitalism.gameState.time;
 
+import com.sudocapitalism.gameState.GameState;
+
 public interface TimeListener {
 
-    public void timeChanged();
+    default public void weekHasChanged(GameState gameState) {}
 }

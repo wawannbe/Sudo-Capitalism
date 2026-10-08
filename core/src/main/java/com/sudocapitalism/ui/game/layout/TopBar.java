@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.GameStateListener;
+import com.sudocapitalism.gameState.time.TimeListener;
 
-public class TopBar extends Table implements GameStateListener {
+public class TopBar extends Table implements TimeListener {
 
     private final Label companyMoneyLabel;
 
@@ -15,7 +15,7 @@ public class TopBar extends Table implements GameStateListener {
 
     public TopBar(Main main, GameState gameState) {
 
-        gameState.addListener(this);
+        gameState.addTimeListener(this);
 
         this.defaults().pad(10f, 10f, 10f, 10f);
         this.setBackground(main.getUiSkin().newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
