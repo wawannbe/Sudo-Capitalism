@@ -2,17 +2,22 @@ package com.sudocapitalism.gameState.time;
 
 import com.sudocapitalism.gameState.GameState;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Time {
 
     private int week;
 
-    private final ArrayList<TimeListener> timeListeners;
+    private final GameState gameState;
 
-    public Time() {
+    private final List<TimeListener> timeListeners;
+
+    public Time(GameState gameState) {
 
         this.timeListeners = new ArrayList<>();
+
+        this.gameState = gameState;
 
         this.week = 1;
     }
@@ -21,9 +26,9 @@ public class Time {
         return this.week;
     }
 
-    public void nextWeek(GameState gameState) {
+    public void nextWeek() {
         this.week ++;
-        notifyTimeListeners(gameState);
+        notifyWeekHasChanged();
     }
 
     public boolean addTimeListener(TimeListener timeListener) {
@@ -34,10 +39,10 @@ public class Time {
         return this.timeListeners.remove(timeListener);
     }
 
-    public void notifyTimeListeners(GameState gameState) {
+    public void notifyWeekHasChanged() {
 
         for (TimeListener timeListener : this.timeListeners) {
-            timeListener.weekHasChanged(gameState);
+            timeListener.weekHasChanged(this.gameState);
         }
     }
 }

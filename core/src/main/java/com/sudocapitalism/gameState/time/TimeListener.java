@@ -4,5 +4,5 @@ import com.sudocapitalism.gameState.GameState;
 
 public interface TimeListener {
 
-    default public void weekHasChanged(GameState gameState) {}
+    default void weekHasChanged(GameState gameState) {}
 }

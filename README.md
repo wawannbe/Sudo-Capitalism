@@ -476,6 +476,11 @@ classDiagram
 
 ## Changelog
 
+**v0.2.8**
+
+- The UI has been separated again to make it even easier to maintain in the future.
+- Dedicated listeners are being added to some classes like `Production` or `Company` to make the code lighter.
+
 **v0.2.7**
 
 - Listeners are being separated to make the code easier to maintain.

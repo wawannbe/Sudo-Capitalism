@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.sudocapitalism.Main;
+import com.sudocapitalism.company.CompanyListener;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.time.TimeListener;
 
-public class TopBar extends Table implements TimeListener {
+public class TopBar extends Table implements TimeListener, CompanyListener {
 
     private final Label companyMoneyLabel;
 
@@ -16,6 +17,7 @@ public class TopBar extends Table implements TimeListener {
     public TopBar(Main main, GameState gameState) {
 
         gameState.addTimeListener(this);
+        gameState.getCompany().addCompanyListener(this);
 
         this.defaults().pad(10f, 10f, 10f, 10f);
         this.setBackground(main.getUiSkin().newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
@@ -42,5 +44,10 @@ public class TopBar extends Table implements TimeListener {
     @Override
     public void weekHasChanged(GameState gameState) {
         this.weekLabel.setText(String.format("Week %d", gameState.getWeek()));
+    }
+
+    @Override
+    public void moneyAmountHasChanged(GameState gameState) {
+        this.getCompanyMoneyLabel().setText(String.format("%.2f $", gameState.getCompany().getMoney()));
     }
 }

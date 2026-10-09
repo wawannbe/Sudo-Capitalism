@@ -1,6 +1,10 @@
 package com.sudocapitalism.gameState.production;
 
+import com.sudocapitalism.gameState.GameState;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Production {
@@ -10,11 +14,34 @@ public class Production {
 
     private final Map<Product, Integer> inventory;
 
-    public Production() {
+    private final List<ProductionListener> productionListeners;
+
+    private final GameState gameState;
+
+    public Production(GameState gameState) {
+
+        this.productionListeners = new ArrayList<>();
+
+        this.gameState = gameState;
 
         this.level = 1;
 
         this.inventory = new HashMap<>();
+    }
+
+    public boolean addProductionListener(ProductionListener productionListener) {
+        return this.productionListeners.add(productionListener);
+    }
+
+    public boolean removeProductionListener(ProductionListener  productionListener) {
+        return this.productionListeners.remove(productionListener);
+    }
+
+    public void notifyProductionHasBeenUpgraded() {
+
+        for (ProductionListener productionListener : this.productionListeners) {
+            productionListener.productionHasBeenUpgraded(this.gameState);
+        }
     }
 
     public int getLevel() {
@@ -30,6 +57,8 @@ public class Production {
         if (this.level < 10) {
 
             this.level ++;
+
+            notifyProductionHasBeenUpgraded();
 
             return true;
 

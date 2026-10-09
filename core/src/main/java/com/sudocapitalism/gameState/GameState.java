@@ -57,9 +57,9 @@ public class GameState {
 
         this.listeners = new ArrayList<>();
 
-        this.time = new Time();
+        this.time = new Time(this);
 
-        this.company = new Company();
+        this.company = new Company(this);
 
         this.economy = new Economy(this.company);
         this.reputation = new Reputation(this.company);
@@ -104,7 +104,7 @@ public class GameState {
     }
 
     public void nextWeek() {
-        this.time.nextWeek(this);
+        this.time.nextWeek();
     }
 
 

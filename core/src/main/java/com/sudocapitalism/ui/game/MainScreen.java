@@ -13,6 +13,7 @@ import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
 import com.sudocapitalism.gameState.time.TimeListener;
+import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
 import com.sudocapitalism.ui.game.layout.SideBar;
 import com.sudocapitalism.ui.game.layout.TopBar;
 
@@ -25,10 +26,9 @@ public class MainScreen implements Screen {
     private Stage stage;
 
 
-
     public MainScreen(Main main, GameState gameState) {
-        this.main = main;
 
+        this.main = main;
         this.gameState = gameState;
     }
 
@@ -45,7 +45,6 @@ public class MainScreen implements Screen {
 
         Table root = new Table();
         root.setFillParent(true);
-        root.setDebug(false);
         root.defaults().expandX();
 
 
@@ -59,28 +58,7 @@ public class MainScreen implements Screen {
 
         SideBar buttonGroup = new SideBar(main, gameState);
 
-        Table dashboard = new Table();
-
-
-
-        Label productionLevel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.getUiSkin());
-
-        TextButton upgradeProduction = new TextButton("^", main.getUiSkin());
-        upgradeProduction.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeProduction();
-                productionLevel.setText(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()));
-                topBar.getCompanyMoneyLabel().setText(String.format("%.2f $", gameState.getCompany().getMoney()));
-
-                if (gameState.getCompany().getProductionLevel() == 10) {
-                    upgradeProduction.setText("Max level !");
-                }
-            }
-        });
-
-        dashboard.add(productionLevel);
-        dashboard.add(upgradeProduction);
+        Table dashboard = new ProductionDashboard(main, gameState);
 
         ScrollPane scrollPane = new ScrollPane(dashboard);
 

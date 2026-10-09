@@ -2,10 +2,12 @@ package com.sudocapitalism.company;
 
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.worker.Worker;
+import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,9 +28,13 @@ public class Company {
     private String name;
 
     /** List of workers employed by this company */
-    private final ArrayList<Worker> employees;
+    private final List<Worker> employees;
 
     private final Production production;
+
+    private final List<CompanyListener> companyListeners;
+
+    private GameState gameState;
 
     // ---< Constructor >---
 
@@ -38,13 +44,29 @@ public class Company {
      * along with an empty list of employees.
      * The default name can be overridden by the player
      */
-    public Company() {
+    public Company(GameState gameState) {
         this.name = "NoNameCorp";
         this.money = 2000.0;
 
         this.employees = new ArrayList<>();
 
-        this.production = new Production();
+        this.gameState = gameState;
+
+        this.production = new Production(this.gameState);
+
+        this.companyListeners = new ArrayList<>();
+    }
+
+
+    public boolean addCompanyListener(CompanyListener companyListener) {
+        return this.companyListeners.add(companyListener);
+    }
+
+    public void notifyMoneyAmountHasChanged() {
+
+        for (CompanyListener companyListener : this.companyListeners) {
+            companyListener.moneyAmountHasChanged(this.gameState);
+        }
     }
 
 
@@ -102,7 +124,7 @@ public class Company {
      * Retrieves the list of all workers currently employed by this company.
      * @return An unmodifiable view of the ArrayList containing every active employees.
      */
-    public ArrayList<Worker> getEmployees() {
+    public List<Worker> getEmployees() {
         return employees;
     }
 
@@ -128,6 +150,11 @@ public class Company {
 
     // ---< Production >---
 
+
+    public Production getProduction() {
+        return production;
+    }
+
     public int getProductionLevel() {
         return this.production.getLevel();
     }
@@ -136,6 +163,7 @@ public class Company {
 
         if (this.production.upgradeProduction()) {
             this.spendMoney(10);
+            notifyMoneyAmountHasChanged();
         }
     }
 
