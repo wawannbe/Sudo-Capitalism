@@ -8,6 +8,8 @@ import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
 
 public class MainScreenLayout extends Table {
 
+    private final ProductionDashboard productionDashboard;
+
     public MainScreenLayout(Main main, GameState gameState) {
 
         this.setFillParent(true);
@@ -21,11 +23,11 @@ public class MainScreenLayout extends Table {
 
         // ---< Center part of the screen >---
 
-        SideBar buttonGroup = new SideBar(main, gameState);
+        SideBar buttonGroup = new SideBar(main, gameState, this);
 
-        Table dashboard = new ProductionDashboard(main, gameState);
+        this.productionDashboard = new ProductionDashboard(main, gameState);
 
-        ScrollPane scrollPane = new ScrollPane(dashboard);
+        ScrollPane scrollPane = new ScrollPane(this.productionDashboard);
 
         Table window = new Table();
         window.setDebug(true);
@@ -34,5 +36,13 @@ public class MainScreenLayout extends Table {
 
 
         this.add(window).expand().fill().pad(0, 10f, 10f, 10f);
+    }
+
+    public void showProductionDashboard() {
+        this.productionDashboard.setVisible(true);
+    }
+
+    public void hideProduction() {
+        this.productionDashboard.setVisible(false);
     }
 }

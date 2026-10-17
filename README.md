@@ -9,6 +9,8 @@ This is now the second iteration of the game in Java.
 
 The game is using [LibGDX](https://libgdx.com/) to run.
 
+*No code from this repo has been written by AI, this project is human made :)*
+
 ## Class diagram
 
 ```mermaid
@@ -475,6 +477,10 @@ classDiagram
 ```
 
 ## Changelog
+
+**v0.2.10**
+
+- Doc added to the `SideBar` class.
 
 **v0.2.9**
 
