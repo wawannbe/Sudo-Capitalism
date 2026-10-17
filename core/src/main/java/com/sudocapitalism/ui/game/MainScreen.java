@@ -14,6 +14,7 @@ import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.GameStateListener;
 import com.sudocapitalism.gameState.time.TimeListener;
 import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
+import com.sudocapitalism.ui.game.layout.MainScreenLayout;
 import com.sudocapitalism.ui.game.layout.SideBar;
 import com.sudocapitalism.ui.game.layout.TopBar;
 
@@ -40,37 +41,11 @@ public class MainScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-
         // ---< Root container to hold the different sections >---
 
-        Table root = new Table();
-        root.setFillParent(true);
-        root.defaults().expandX();
+        Table layout = new MainScreenLayout(this.main, this.gameState);
 
-
-        // ---< Top bar of the screens >---
-
-        TopBar topBar = new TopBar(main, gameState);
-        root.add(topBar).pad(10f, 0, 10f, 0).row();
-
-
-        // ---< Center part of the screen >---
-
-        SideBar buttonGroup = new SideBar(main, gameState);
-
-        Table dashboard = new ProductionDashboard(main, gameState);
-
-        ScrollPane scrollPane = new ScrollPane(dashboard);
-
-        Table window = new Table();
-        window.setDebug(true);
-        window.add(buttonGroup).expandY();
-        window.add(scrollPane).expand();
-
-
-        root.add(window).expand().fill().pad(0, 10f, 0, 10f);
-
-        stage.addActor(root);
+        stage.addActor(layout);
     }
 
     @Override

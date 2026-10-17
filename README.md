@@ -476,6 +476,10 @@ classDiagram
 
 ## Changelog
 
+**v0.2.9**
+
+- The UI has now been completely separated into smaller classes to make it easier to maintain.
+
 **v0.2.8**
 
 - The UI has been separated again to make it even easier to maintain in the future.
