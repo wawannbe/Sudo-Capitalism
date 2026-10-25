@@ -268,7 +268,7 @@ classDiagram
 ## Features to be added
 *This is a list I'll fill along development with ideas I have for the game.
 
-- [ ] A storage system the needs to be upgraded in order to produce and sell more items
+- [x] A storage system the needs to be upgraded in order to produce and sell more items
 - [ ] Proper economy simulation
 
 ## Project structure
@@ -483,6 +483,11 @@ classDiagram
 ```
 
 ## Changelog
+
+**v0.2.12**
+
+- Added a new way of representing a level with a progress bar.
+- New inventory capacity system.
 
 **v0.2.11**
 

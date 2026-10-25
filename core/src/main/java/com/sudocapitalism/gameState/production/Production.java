@@ -7,11 +7,23 @@ public class Production {
 
     // ---------< Attributes >---------
 
+    // ---< Level >---
+
     /** The maximum level a production can be */
     private static final int MAX_LEVEL = 10;
 
     /** The current level of the production */
     private int level;
+
+    // ---< Capacity >---
+
+    /** The maximum level a production can be */
+    private static final int MAX_CAPACITY = 10000;
+
+    /* Total amount of Products that can be stored in the Production */
+    private int capacity;
+
+    // ---< Inventory >---
 
     /** The products the production has in stock */
     private final Map<Product, Integer> inventory;
@@ -37,6 +49,7 @@ public class Production {
         this.gameState = gameState;
 
         this.level = 1;
+        this.capacity = 100;
 
         this.inventory = new HashMap<>();
     }
@@ -62,20 +75,12 @@ public class Production {
         this.productionListeners.remove(productionListener);
     }
 
-    // ---< Notification >---
-
-    /**
-     * Notifies all the listeners about the production being upgraded
-     */
-    public void notifyProductionHasBeenUpgraded() {
-
-        for (ProductionListener productionListener : this.productionListeners) {
-            productionListener.productionHasBeenUpgraded(this.gameState);
-        }
-    }
-
 
     // ---------< Level >---------
+
+    public static int getMaxLevel() {
+        return MAX_LEVEL;
+    }
 
     /**
      * Returns the current level of the Production
@@ -109,13 +114,55 @@ public class Production {
 
             this.level ++;
 
-            notifyProductionHasBeenUpgraded();
+            notifyLevelUpgraded();
 
             return true;
 
         } else {
 
             return false;
+        }
+    }
+
+    // ---< Notification >---
+
+    /**
+     * Notifies all the listeners about the production being upgraded
+     */
+    public void notifyLevelUpgraded() {
+
+        for (ProductionListener productionListener : this.productionListeners) {
+            productionListener.productionLevelUpgraded(this.gameState);
+        }
+    }
+
+
+    // ---------< Capacity >---------
+
+    public static int getMaxCapacity() {
+        return MAX_CAPACITY;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+    public void upgradeCapacity() {
+
+        this.capacity += 100;
+
+        notifyCapacityUpgraded();
+    }
+
+    // ---< Notification >---
+
+    /**
+     * Notifies all the listeners about the production being upgraded
+     */
+    public void notifyCapacityUpgraded() {
+
+        for (ProductionListener productionListener : this.productionListeners) {
+            productionListener.productionCapacityUpgraded(this.gameState);
         }
     }
 
@@ -132,6 +179,23 @@ public class Production {
     }
 
     /**
+     * Returns the total amount of items in the inventory regardless of their type
+     *
+     * @return int The amount of items in the inventory
+     */
+    public int usedCapacity() {
+
+        int amount = 0;
+
+        for (Map.Entry<Product, Integer> entry : this.inventory.entrySet()) {
+
+            amount += entry.getValue();
+        }
+
+        return amount;
+    }
+
+    /**
      * Adds a given Product to the inventory.
      * If the Product is already in the inventory, its amount is increased.
      *
@@ -140,12 +204,18 @@ public class Production {
      */
     public void addToInventory(Product product, int amount) {
 
-        if (this.inventory.containsKey(product)) {
-            this.inventory.replace(product, this.inventory.get(product) + amount);
+        if (this.usedCapacity() + amount <= this.capacity) {        // Checks if there is enough capacity to hold the new Products
 
-        } else {
-            this.inventory.put(product, amount);
+            if (this.inventory.containsKey(product)) {              // Checks if the Product is already registered in the inventory
+
+                this.inventory.replace(product, this.inventory.get(product) + amount);  // Updates the amount if that's the case
+
+            } else {
+                this.inventory.put(product, amount);                                    // Registers it if not
+            }
         }
+
+
     }
 
     /**

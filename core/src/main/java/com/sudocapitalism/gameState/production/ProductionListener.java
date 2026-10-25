@@ -4,5 +4,7 @@ import com.sudocapitalism.gameState.GameState;
 
 public interface ProductionListener {
 
-    default void productionHasBeenUpgraded(GameState gameState) {}
+    default void productionLevelUpgraded(GameState gameState) {}
+
+    default void productionCapacityUpgraded(GameState gameState) {}
 }

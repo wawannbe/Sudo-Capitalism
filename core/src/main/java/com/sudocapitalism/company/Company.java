@@ -3,7 +3,6 @@ package com.sudocapitalism.company;
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.worker.Worker;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
 import com.sudocapitalism.gameState.production.ProductionListener;
 
@@ -63,8 +62,8 @@ public class Company {
     }
 
 
-    public boolean addCompanyListener(CompanyListener companyListener) {
-        return this.companyListeners.add(companyListener);
+    public void addCompanyListener(CompanyListener companyListener) {
+        this.companyListeners.add(companyListener);
     }
 
     public void notifyMoneyAmountHasChanged() {
@@ -155,21 +154,33 @@ public class Company {
 
     // ---------< Production >---------
 
-    public Production getProduction() {
-        return production;
-    }
+    // ---< Level >---
 
     public int getProductionLevel() {
         return this.production.getLevel();
     }
 
-    public void upgradeProduction() {
+    public void upgradeProductionLevel() {
 
         if (this.production.upgradeProduction()) {
             this.spendMoney(10);
             notifyMoneyAmountHasChanged();
         }
     }
+
+    // ---< Capacity >---
+
+    public int getProductionCapacity() {
+        return this.production.getCapacity();
+    }
+
+    public void upgradeCapacityLevel() {
+
+        this.production.upgradeCapacity();
+        this.spendMoney(200);
+        notifyMoneyAmountHasChanged();
+    }
+
 
     // ---< Production Listeners>---
 
