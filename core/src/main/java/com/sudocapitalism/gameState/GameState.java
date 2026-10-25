@@ -95,8 +95,8 @@ public class GameState {
 
     // ----------< Time >----------
 
-    public boolean addTimeListener(TimeListener timeListener) {
-        return this.time.addTimeListener(timeListener);
+    public void addTimeListener(TimeListener timeListener) {
+        this.time.addTimeListener(timeListener);
     }
 
     public int getWeek() {

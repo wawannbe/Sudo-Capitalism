@@ -5,6 +5,7 @@ import com.sudocapitalism.character.worker.Worker;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
+import com.sudocapitalism.gameState.production.ProductionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class Company {
 
 
-    // ---< Attributes >---
+    // ---------< Attributes >---------
 
     /** The amount of money the company owns */
     private double money;
@@ -30,13 +31,17 @@ public class Company {
     /** List of workers employed by this company */
     private final List<Worker> employees;
 
+    /** The production associated with the company */
     private final Production production;
 
+    /** List of listeners of the company */
     private final List<CompanyListener> companyListeners;
 
-    private GameState gameState;
+    /** THe GameState being used by the company */
+    private final GameState gameState;
 
-    // ---< Constructor >---
+
+    // ---------< Constructor >---------
 
     /**
      * Default constructor initializing a company without a specific name with a starting capital.
@@ -70,7 +75,7 @@ public class Company {
     }
 
 
-    // ---< Name >---
+    // ---------< Name >---------
 
     /**
      * Retrieves the name of the company.
@@ -89,7 +94,7 @@ public class Company {
     }
 
 
-    // ---< Money >---
+    // ---------< Money >---------
 
     /**
      * Retrieves the current amount of money owned by the company.
@@ -118,7 +123,7 @@ public class Company {
     }
 
 
-    // ---< Employees >---
+    // ---------< Employees >---------
 
     /**
      * Retrieves the list of all workers currently employed by this company.
@@ -148,8 +153,7 @@ public class Company {
     }
 
 
-    // ---< Production >---
-
+    // ---------< Production >---------
 
     public Production getProduction() {
         return production;
@@ -167,8 +171,15 @@ public class Company {
         }
     }
 
+    // ---< Production Listeners>---
 
-    // ---< toString >---
+    public void addProductionListener(ProductionListener productionListener) {
+
+        this.production.addProductionListener(productionListener);
+    }
+
+
+    // ---------< toString >---------
 
     @Override
     public String toString() {

@@ -18,7 +18,7 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
     public ProductionDashboard(Main main, GameState gameState) {
 
-        gameState.getCompany().getProduction().addProductionListener(this);
+        gameState.getCompany().addProductionListener(this);
 
         this.productionLevelLabel = new Label(String.format("Lvl. %d", gameState.getCompany().getProductionLevel()), main.getUiSkin());
 

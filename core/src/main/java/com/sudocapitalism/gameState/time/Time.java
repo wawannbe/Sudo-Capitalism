@@ -31,8 +31,8 @@ public class Time {
         notifyWeekHasChanged();
     }
 
-    public boolean addTimeListener(TimeListener timeListener) {
-        return this.timeListeners.add(timeListener);
+    public void addTimeListener(TimeListener timeListener) {
+        this.timeListeners.add(timeListener);
     }
 
     public boolean removeTimeListener(TimeListener timeListener) {
