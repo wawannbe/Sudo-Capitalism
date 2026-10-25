@@ -266,7 +266,7 @@ classDiagram
 ```
 
 ## Features to be added
-*This is a list I'll fill along development with ideas I have for the game.
+*This is a list I'll fill along development with ideas I have for the game.*
 
 - [x] A storage system the needs to be upgraded in order to produce and sell more items
 - [ ] Proper economy simulation
