@@ -14,10 +14,7 @@ import com.sudocapitalism.ui.menu.NewGameScreen;
 import com.sudocapitalism.ui.menu.OptionsScreen;
 import com.sudocapitalism.ui.menu.LoadScreen;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Main class of the game, manages and instanciates everything
@@ -52,7 +49,7 @@ public class Main extends Game {
     // ---< Products >---
 
     /** The list of all the products the company can choose to produce */
-    private List<Product> availableToProduce;
+    private Map<String, Product> availableToProduce;
 
 
     // ---------< Constructor >---------
@@ -132,7 +129,27 @@ public class Main extends Game {
      *
      * @return The products as a list
      */
-    public List<Product> getAvailableToProduce() {
-        return Collections.unmodifiableList(this.availableToProduce);
+    public Map<String, Product> getAvailableToProduce() {
+        return Collections.unmodifiableMap(this.availableToProduce);
+    }
+
+    public String[] getAvailableToProduceNames() {
+
+        String[] productsNames = new String[this.availableToProduce.size()];
+
+        int idx = 0;
+
+        for (Map.Entry<String, Product> productEntry : this.availableToProduce.entrySet()) {
+
+            productsNames[idx] = productEntry.getKey();
+
+            idx++;
+        }
+
+        return productsNames;
+    }
+
+    public Product getProductByName(String name) {
+        return this.availableToProduce.get(name);
     }
 }

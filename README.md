@@ -338,6 +338,17 @@ sudocapitalism
 Builds:
 
 <details open>
+    <summary>PA-0.3.0</summary>
+
+**v0.3.0**
+
+A big step has been done in terms of backend and UI.
+- The production system is almost fully implemented.
+- The UI is closer to its final form.
+
+</details>
+
+<details>
     <summary>PA-0.2</summary>
 
 **v0.2.16**

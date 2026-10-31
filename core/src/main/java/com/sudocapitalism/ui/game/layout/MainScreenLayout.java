@@ -1,16 +1,18 @@
 package com.sudocapitalism.ui.game.layout;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
+import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
 import com.sudocapitalism.ui.game.widgets.ProductionWidget;
 
 public class MainScreenLayout extends Table {
 
-    private final ProductionWidget productionDashboard;
+    private final ProductionDashboard productionDashboard;
 
-    public MainScreenLayout(Main main, GameState gameState) {
+    public MainScreenLayout(Main main, GameState gameState, Stage mainScreenStage) {
 
         this.setFillParent(true);
         this.defaults().expandX();
@@ -25,7 +27,7 @@ public class MainScreenLayout extends Table {
 
         SideBar buttonGroup = new SideBar(main, gameState, this);
 
-        this.productionDashboard = new ProductionWidget(main, gameState);
+        this.productionDashboard = new ProductionDashboard(main, gameState, mainScreenStage);
 
         ScrollPane scrollPane = new ScrollPane(this.productionDashboard);
 

@@ -2,13 +2,12 @@ package com.sudocapitalism.gameState.production;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.OrderedMap;
 import com.sudocapitalism.item.Item;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Represents a Product that can be produced in a Production and sold by a Company.
@@ -66,9 +65,9 @@ public class Product extends Item {
      *
      * @return An ArrayList containing the products
      */
-    public static List<Product> init() {
+    public static Map<String, Product> init() {
 
-        List<Product> products = new ArrayList<>();
+        Map<String, Product> products = new HashMap<>();
 
         Scanner scanner = new Scanner(Gdx.files.internal("data/products/products.csv").readString());
 
@@ -76,7 +75,7 @@ public class Product extends Item {
 
             String[] line = scanner.nextLine().split(":");
 
-            products.add(new Product(line[0], line[1], Double.parseDouble(line[2])));
+            products.put(line[0], new Product(line[0], line[1], Double.parseDouble(line[2])));
         }
 
         return products;

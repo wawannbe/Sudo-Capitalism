@@ -75,7 +75,6 @@ public class Company {
         this.gameState = gameState;
 
         this.productionsList = new ArrayList<>();
-        this.productionsList.add(new Production(this.gameState, main.getAvailableToProduce().getFirst()));    // Defaulting to the first value for test purposes
 
         this.companyListeners = new ArrayList<>();
     }
@@ -130,7 +129,10 @@ public class Company {
      * @param amount the amount to add.
      */
     public void addMoney(double amount) {
+
         this.money += Math.abs(amount);     // Ensures that a positive amount is always added.
+
+        this.notifyMoneyAmountHasChanged();
     }
 
     /**
@@ -139,7 +141,10 @@ public class Company {
      * @param amount the amount to deduct.
      */
     public void spendMoney(double amount) {
-        this.money -= Math.abs(amount);     // Ensures that a positive amount is always added.
+
+        this.money -= Math.abs(amount);     // Ensures that a positive amount is always removed.
+
+        this.notifyMoneyAmountHasChanged();
     }
 
 
@@ -178,6 +183,8 @@ public class Company {
     public void newProduction(Product product) {
 
         this.productionsList.add(new Production(this.gameState, product));
+
+        this.spendMoney(500);
     }
 
     public Product getProducedProduct(int idx) {
@@ -194,7 +201,6 @@ public class Company {
 
         if (this.productionsList.get(idx).upgradeProduction()) {
             this.spendMoney(10);
-            notifyMoneyAmountHasChanged();
         }
     }
 
@@ -204,11 +210,10 @@ public class Company {
         return this.productionsList.get(idx).getCapacity();
     }
 
-    public void upgradeCapacityLevel(int idx) {
+    public void upgradeCapacity(int idx) {
 
         this.productionsList.get(idx).upgradeCapacity();
         this.spendMoney(200);
-        notifyMoneyAmountHasChanged();
     }
 
     // ---< Production Listeners>---

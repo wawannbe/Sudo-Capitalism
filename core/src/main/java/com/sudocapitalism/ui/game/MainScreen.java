@@ -35,7 +35,7 @@ public class MainScreen implements Screen {
 
         // ---< Root container to hold the different sections >---
 
-        Table layout = new MainScreenLayout(this.main, this.gameState);
+        Table layout = new MainScreenLayout(this.main, this.gameState, this.stage);
 
         stage.addActor(layout);
     }
@@ -73,5 +73,9 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public Stage getStage() {
+        return this.stage;
     }
 }

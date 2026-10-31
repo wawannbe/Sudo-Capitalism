@@ -23,7 +23,7 @@ public class ProductionWidget extends Table implements ProductionListener {
     // ---< ID >---
 
     /** Counter used to handle the auto-generated IDs */
-    private static int idCounter = 0;
+    private static int ID_COUNTER = 0;
 
     /** The ID of the widget - used to avoid multiple widgets pointing at the same production */
     private final int ID;
@@ -71,7 +71,7 @@ public class ProductionWidget extends Table implements ProductionListener {
      */
     public ProductionWidget(Main main, GameState gameState) {
 
-        this.ID = idCounter++;
+        this.ID = ID_COUNTER ++;
 
         this.setDebug(true);
 
@@ -80,7 +80,7 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.gameState = gameState;
         this.gameState.getCompany().addProductionListener(this, this.ID);
 
-        this.add(new Label(this.gameState.getCompany().getProducedProduct(0).getName() + " production", this.main.getUiSkin())).colspan(3).row();
+        this.add(new Label(this.gameState.getCompany().getProducedProduct(this.ID).getName() + " production", this.main.getUiSkin())).colspan(3).row();
 
         this.initLevelSection();
         this.initCapacitySection();
@@ -146,7 +146,7 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.upgradeCapacityButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeCapacityLevel(ID);
+                gameState.getCompany().upgradeCapacity(ID);
             }
         });
 

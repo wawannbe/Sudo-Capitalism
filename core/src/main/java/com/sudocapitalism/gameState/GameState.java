@@ -6,15 +6,12 @@ import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.Player;
 import com.sudocapitalism.company.Company;
 import com.sudocapitalism.gameState.economy.Economy;
-import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.reputation.Reputation;
 import com.sudocapitalism.gameState.time.Time;
 import com.sudocapitalism.gameState.time.TimeListener;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
