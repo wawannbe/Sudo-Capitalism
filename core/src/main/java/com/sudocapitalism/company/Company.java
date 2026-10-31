@@ -23,23 +23,41 @@ public class Company {
 
     // ---------< Attributes >---------
 
+    // ---< Money >---
+
     /** The amount of money the company owns */
     private double money;
+
+
+    // ---< Name >---
 
     /** The name of the company */
     private String name;
 
+
+    // ---< Employees >---
+
     /** List of workers employed by this company */
     private final List<Worker> employees;
 
+
+    // ---< Production >---
+
     /** The production associated with the company */
-    private final Production production;
+    private final List<Production> productionsList;
+
+
+    // ---< Listeners >---
 
     /** List of listeners of the company */
     private final List<CompanyListener> companyListeners;
 
+
+    // ---< GameState >---
+
     /** THe GameState being used by the company */
     private final GameState gameState;
+
 
     // ---------< Constructor >---------
 
@@ -57,11 +75,14 @@ public class Company {
 
         this.gameState = gameState;
 
-        this.production = new Production(this.gameState, main.getAvailableToProduce().getFirst());  // Defaulting to the first value for test purposes
+        this.productionsList = new ArrayList<>();
+        this.productionsList.add(new Production(this.gameState, main.getAvailableToProduce().getFirst()));    // Defaulting to the first value for test purposes
 
         this.companyListeners = new ArrayList<>();
     }
 
+
+    // ---------< Listeners >---------
 
     public void addCompanyListener(CompanyListener companyListener) {
         this.companyListeners.add(companyListener);
@@ -155,19 +176,24 @@ public class Company {
 
     // ---------< Production >---------
 
-    public Product getProducedProduct() {
-        return this.production.getProducedProduct();
+    public void newProduction(Product product) {
+
+        this.productionsList.add(new Production(this.gameState, product));
+    }
+
+    public Product getProducedProduct(int idx) {
+        return this.productionsList.get(idx).getProducedProduct();
     }
 
     // ---< Level >---
 
-    public int getProductionLevel() {
-        return this.production.getLevel();
+    public int getProductionLevel(int idx) {
+        return this.productionsList.get(idx).getLevel();
     }
 
-    public void upgradeProductionLevel() {
+    public void upgradeProductionLevel(int idx) {
 
-        if (this.production.upgradeProduction()) {
+        if (this.productionsList.get(idx).upgradeProduction()) {
             this.spendMoney(10);
             notifyMoneyAmountHasChanged();
         }
@@ -175,13 +201,13 @@ public class Company {
 
     // ---< Capacity >---
 
-    public int getProductionCapacity() {
-        return this.production.getCapacity();
+    public int getProductionCapacity(int idx) {
+        return this.productionsList.get(idx).getCapacity();
     }
 
-    public void upgradeCapacityLevel() {
+    public void upgradeCapacityLevel(int idx) {
 
-        this.production.upgradeCapacity();
+        this.productionsList.get(idx).upgradeCapacity();
         this.spendMoney(200);
         notifyMoneyAmountHasChanged();
     }
@@ -189,9 +215,9 @@ public class Company {
 
     // ---< Production Listeners>---
 
-    public void addProductionListener(ProductionListener productionListener) {
+    public void addProductionListener(ProductionListener productionListener, int idx) {
 
-        this.production.addProductionListener(productionListener);
+        this.productionsList.get(idx).addProductionListener(productionListener);
     }
 
 

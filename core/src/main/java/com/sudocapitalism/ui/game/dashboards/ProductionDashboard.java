@@ -17,6 +17,13 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
     // ---------< Attributes >---------
 
+    // ---< ID >---
+
+    private static int idCounter = 0;
+    private final int ID;
+
+    // ---< GameState & Main >---
+
     private final GameState gameState;
 
     private final Main main;
@@ -44,17 +51,19 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
     public ProductionDashboard(Main main, GameState gameState) {
 
+        this.ID = idCounter++;
+
         this.setDebug(false);
 
         this.main = main;
 
         this.gameState = gameState;
-        this.gameState.getCompany().addProductionListener(this);
+        this.gameState.getCompany().addProductionListener(this, this.ID);
 
         this.initLevelSection();
         this.initCapacitySection();
 
-        this.add(new Label(this.gameState.getCompany().getProducedProduct().getName(), this.main.getUiSkin())).row();
+        this.add(new Label(this.gameState.getCompany().getProducedProduct(0).getName(), this.main.getUiSkin())).row();
     }
 
 
@@ -64,15 +73,15 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
         this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, this.main.getUiSkin());
         this.levelBar.setAnimateDuration(0.2f);
-        this.levelBar.setValue(this.gameState.getCompany().getProductionLevel());
+        this.levelBar.setValue(this.gameState.getCompany().getProductionLevel(this.ID));
 
-        this.LevelLabel = new Label(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel()), this.main.getUiSkin());
+        this.LevelLabel = new Label(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel(this.ID)), this.main.getUiSkin());
 
         this.upgradeLevelButton = new TextButton("^", main.getUiSkin());
         this.upgradeLevelButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeProductionLevel();
+                gameState.getCompany().upgradeProductionLevel(ID);
             }
         });
 
@@ -84,10 +93,10 @@ public class ProductionDashboard extends Table implements ProductionListener {
     @Override
     public void productionLevelUpgraded(GameState gameState) {
 
-        this.LevelLabel.setText(String.format("Production level: %d", gameState.getCompany().getProductionLevel()));
-        this.levelBar.setValue(gameState.getCompany().getProductionLevel());
+        this.LevelLabel.setText(String.format("Production level: %d", gameState.getCompany().getProductionLevel(this.ID)));
+        this.levelBar.setValue(gameState.getCompany().getProductionLevel(this.ID));
 
-        if (gameState.getCompany().getProductionLevel() == Production.getMaxLevel()) {
+        if (gameState.getCompany().getProductionLevel(this.ID) == Production.getMaxLevel()) {
 
             this.upgradeLevelButton.setVisible(false);
         }
@@ -100,15 +109,15 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
         this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, this.main.getUiSkin());
         this.capacityBar.setAnimateDuration(0.2f);
-        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity());
+        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity(this.ID));
 
-        this.CapacityLabel = new Label(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity()), this.main.getUiSkin());
+        this.CapacityLabel = new Label(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity(this.ID)), this.main.getUiSkin());
 
         this.upgradeCapacityButton = new TextButton("^", main.getUiSkin());
         this.upgradeCapacityButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeCapacityLevel();
+                gameState.getCompany().upgradeCapacityLevel(ID);
             }
         });
 
@@ -120,10 +129,10 @@ public class ProductionDashboard extends Table implements ProductionListener {
     @Override
     public void productionCapacityUpgraded(GameState gameState) {
 
-        this.CapacityLabel.setText(String.format("Capacity: %d", gameState.getCompany().getProductionCapacity()));
-        this.capacityBar.setValue(gameState.getCompany().getProductionCapacity());
+        this.CapacityLabel.setText(String.format("Capacity: %d", gameState.getCompany().getProductionCapacity(this.ID)));
+        this.capacityBar.setValue(gameState.getCompany().getProductionCapacity(this.ID));
 
-        if (gameState.getCompany().getProductionCapacity() == Production.getMaxCapacity()) {
+        if (gameState.getCompany().getProductionCapacity(this.ID) == Production.getMaxCapacity()) {
 
             this.upgradeCapacityButton.setVisible(false);
         }

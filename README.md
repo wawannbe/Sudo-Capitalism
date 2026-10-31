@@ -484,10 +484,14 @@ classDiagram
 
 ## Changelog
 
+**v0.2.14**
+
+- Multi-production system almost fully implemented.
+
 **v0.2.13**
 
-- Added some data to the game
-- Started moving towards a multi-production system
+- Added some data to the game.
+- Started moving towards a multi-production system.
 
 **v0.2.12**
 
