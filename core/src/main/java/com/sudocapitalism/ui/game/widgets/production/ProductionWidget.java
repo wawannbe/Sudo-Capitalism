@@ -1,5 +1,6 @@
 package com.sudocapitalism.ui.game.widgets.production;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -84,11 +85,25 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, this.main.getUiSkin());
         this.levelBar.setAnimateDuration(0.2f);
         this.levelBar.setValue(this.gameState.getCompany().getProductionLevel(this.ID));
-        this.levelBar.setColor(this.main.getBackgroundColor());
+
+        if (this.main.getBackgroundColor() == Color.BLACK) {    // Avoids having black on black
+            this.levelBar.setColor(Color.GRAY);
+
+        } else {
+            this.levelBar.setColor(this.main.getBackgroundColor());
+        }
 
         this.LevelLabel = new Label(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel(this.ID)), this.main.getUiSkin());
 
         this.upgradeLevelButton = new TextButton("^", main.getUiSkin());
+
+        if (this.main.getBackgroundColor() == Color.BLACK) {    // Avoids having black on black
+            this.upgradeLevelButton.setColor(Color.GRAY);
+
+        } else {
+            this.upgradeLevelButton.setColor(this.main.getBackgroundColor());
+        }
+
         this.upgradeLevelButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

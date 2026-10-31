@@ -1,5 +1,6 @@
 package com.sudocapitalism.ui.game.layout;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -64,6 +65,13 @@ public class SideBar extends Table {
 
         TextButton employeesDashboardButton = new TextButton("E", this.main.getUiSkin());
 
+        if (main.getBackgroundColor() == Color.BLACK) {
+            employeesDashboardButton.setColor(Color.GRAY);
+
+        } else {
+            employeesDashboardButton.setColor(main.getBackgroundColor());
+        }
+
         employeesDashboardButton.addListener(
             new TextTooltip("Manage employees", this.tooltipManager, this.main.getUiSkin())
         );
@@ -87,6 +95,13 @@ public class SideBar extends Table {
     private TextButton marketDashboardButton(MainScreenLayout mainScreenLayout)  {
 
         TextButton marketDashboardButton = new TextButton("M", this.main.getUiSkin());
+
+        if (main.getBackgroundColor() == Color.BLACK) {
+            marketDashboardButton.setColor(Color.GRAY);
+
+        } else {
+            marketDashboardButton.setColor(main.getBackgroundColor());
+        }
 
         marketDashboardButton.addListener(
             new TextTooltip("Manage the market", this.tooltipManager, this.main.getUiSkin())
@@ -112,6 +127,13 @@ public class SideBar extends Table {
 
         TextButton productionDashboardButton = new TextButton("P", this.main.getUiSkin());
 
+        if (main.getBackgroundColor() == Color.BLACK) {
+            productionDashboardButton.setColor(Color.GRAY);
+
+        } else {
+            productionDashboardButton.setColor(main.getBackgroundColor());
+        }
+
         productionDashboardButton.addListener(
             new TextTooltip("Manage the production", this.tooltipManager, this.main.getUiSkin())
         );
@@ -136,6 +158,13 @@ public class SideBar extends Table {
     private TextButton nextWeekButton(GameState gameState) {
 
         TextButton nextWeekButton = new TextButton(">>", this.main.getUiSkin());
+
+        if (main.getBackgroundColor() == Color.BLACK) {
+            nextWeekButton.setColor(Color.GRAY);
+
+        } else {
+            nextWeekButton.setColor(main.getBackgroundColor());
+        }
 
         nextWeekButton.addListener(
             new TextTooltip("Start the next week", this.tooltipManager, this.main.getUiSkin())

@@ -340,6 +340,12 @@ Builds:
 <details open>
     <summary>PA-0.3</summary>
 
+**v0.3.4**
+
+- Added a color check to make the progress bars more readable in case of a black background color.
+- Multiple colors added to the theme.
+- More buttons have been styled and now follow the background's color.
+
 **v0.3.3**
 
 - The inventory system has been replaced by a shared storage between all productions and managed by the Company.

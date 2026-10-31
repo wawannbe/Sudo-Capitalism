@@ -1,5 +1,6 @@
 package com.sudocapitalism.ui.game.widgets.production;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -41,7 +42,13 @@ public class CapacityWidget extends Table implements StorageListener {
         this.capacityBar = new ProgressBar(0, Storage.getMaxCapacity(), 100f, false, main.getUiSkin());
         this.capacityBar.setAnimateDuration(0.2f);
         this.capacityBar.setValue(gameState.getCompany().getStorageCapacity());
-        this.capacityBar.setColor(main.getBackgroundColor());
+
+        if (main.getBackgroundColor() == Color.BLACK) {
+            this.capacityBar.setColor(Color.GRAY);
+
+        } else {
+            this.capacityBar.setColor(main.getBackgroundColor());
+        }
 
         this.CapacityLabel = new Label(String.format("Capacity: %d", gameState.getCompany().getStorageCapacity()), main.getUiSkin());
 

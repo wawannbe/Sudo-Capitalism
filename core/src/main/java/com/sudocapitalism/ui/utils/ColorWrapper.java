@@ -12,10 +12,17 @@ import com.badlogic.gdx.utils.Array;
  */
 public enum ColorWrapper {
 
-    OLIVE("Olive", Color.OLIVE),
-    SLATE("Slate", Color.SLATE),
     ROYAL("Royal", Color.ROYAL),
+    TEAL("Teal", Color.TEAL),
+    OLIVE("Olive", Color.OLIVE),
+    FOREST("Forest", Color.FOREST),
+    SLATE("Slate", Color.SLATE),
     PURPLE("Purple", Color.PURPLE),
+    PINK("Pink", Color.PINK),
+    VIOLET("Violet", Color.VIOLET),
+    SCARLET("Scarlet", Color.SCARLET),
+    WHITE("White", Color.WHITE),
+    ORANGE("Orange", Color.ORANGE),
     BLACK("Black", Color.BLACK);
 
     private final String name;
