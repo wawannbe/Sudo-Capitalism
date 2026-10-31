@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class Company {
 
-
     // ---------< Attributes >---------
 
     // ---< Money >---
@@ -211,7 +210,6 @@ public class Company {
         this.spendMoney(200);
         notifyMoneyAmountHasChanged();
     }
-
 
     // ---< Production Listeners>---
 

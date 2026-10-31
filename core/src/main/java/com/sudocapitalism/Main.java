@@ -2,6 +2,7 @@ package com.sudocapitalism;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,23 +19,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Main class of the game, manages and instanciates everything
+ *
+ * @author Elmouu
+ */
 public class Main extends Game {
 
     // ---------< Attributes >---------
 
     // ---< Esthetics >---
 
+    /** The skin used for the graphical interface */
     private Skin uiSkin;
+
+    /** The color of the background used in all the screens of the game */
     private Color backgroundColor;
 
 
     // ---< Screens >---
 
+    /** Contains all the screens of the game */
     private Map<String, Screen> screenList;
 
 
     // ---< GameState >---
 
+    /** The game state used by all the screens and classes */
     private GameState gameState;
 
 
@@ -46,6 +57,9 @@ public class Main extends Game {
 
     // ---------< Constructor >---------
 
+    /**
+     * Initializes LibGDX and the game
+     */
     @Override
     public void create() {
 
@@ -71,14 +85,29 @@ public class Main extends Game {
 
     // ---------< Esthetics >---------
 
+    /**
+     * Returns the currently selected background color
+     *
+     * @return The background color
+     */
     public Color getBackgroundColor() {
         return this.backgroundColor;
     }
 
+    /**
+     * Sets the background color to the given color, used in the {@link OptionsScreen}
+     *
+     * @param backgroundColor The color to be applied
+     */
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
+    /**
+     * Returns the Skin set to be used
+     *
+     * @return The skin being used
+     */
     public Skin getUiSkin() {
         return uiSkin;
     }
@@ -86,8 +115,13 @@ public class Main extends Game {
 
     // ---------< Screens >---------
 
+    /**
+     * Returns a read-only copy of the screen list
+     *
+     * @return A map containing all the screens
+     */
     public Map<String, Screen> getScreenList() {
-        return screenList;
+        return Collections.unmodifiableMap(this.screenList);
     }
 
 

@@ -1,4 +1,4 @@
-package com.sudocapitalism.ui.game.dashboards;
+package com.sudocapitalism.ui.game.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,42 +11,64 @@ import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.gameState.production.Production;
 import com.sudocapitalism.gameState.production.ProductionListener;
 
+/**
+ * Widget to allow displaying infos about a production in the game and managing it.
+ *
+ * @author Elmouu
+ */
 public class ProductionWidget extends Table implements ProductionListener {
 
     // ---------< Attributes >---------
 
     // ---< ID >---
 
+    /** Counter used to handle the auto-generated IDs */
     private static int idCounter = 0;
+
+    /** The ID of the widget - used to avoid multiple widgets pointing at the same production */
     private final int ID;
 
     // ---< GameState & Main >---
 
+    /** The GameState used in the widget */
     private final GameState gameState;
 
+    /** The Main used in the widget */
     private final Main main;
 
 
     // ---< Level >---
 
+    /** Label showing the level of the widget's assigned production */
     private Label LevelLabel;
 
+    /** Button to upgrade its production's level */
     private TextButton upgradeLevelButton;
 
+    /** Little progress bar to show the level in a cooler way */
     private ProgressBar levelBar;
 
 
     // ---< Capacity >---
 
+    /** Label showing the capacity of the widget's assigned production */
     private Label CapacityLabel;
 
+    /** Button to upgrade its production's capacity */
     private TextButton upgradeCapacityButton;
 
+    /** Little progress bar to show the capacity in a cooler way */
     private ProgressBar capacityBar;
 
 
     // ---------< Constructor >---------
 
+    /**
+     * Creates a new widget to manage a production
+     *
+     * @param main The main class
+     * @param gameState The game state
+     */
     public ProductionWidget(Main main, GameState gameState) {
 
         this.ID = idCounter++;
@@ -67,6 +89,9 @@ public class ProductionWidget extends Table implements ProductionListener {
 
     // ---------< Level >---------
 
+    /**
+     * Initializes the level management section of the widget
+     */
     public void initLevelSection() {
 
         this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, this.main.getUiSkin());
@@ -88,13 +113,16 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.add(this.upgradeLevelButton).row();
     }
 
+    /**
+     * Updates the labels/buttons when the listener is triggered
+     */
     @Override
-    public void productionLevelUpgraded(GameState gameState) {
+    public void productionLevelUpgraded() {
 
-        this.LevelLabel.setText(String.format("Production level: %d", gameState.getCompany().getProductionLevel(this.ID)));
-        this.levelBar.setValue(gameState.getCompany().getProductionLevel(this.ID));
+        this.LevelLabel.setText(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel(this.ID)));
+        this.levelBar.setValue(this.gameState.getCompany().getProductionLevel(this.ID));
 
-        if (gameState.getCompany().getProductionLevel(this.ID) == Production.getMaxLevel()) {
+        if (this.gameState.getCompany().getProductionLevel(this.ID) == Production.getMaxLevel()) {
 
             this.upgradeLevelButton.setVisible(false);
         }
@@ -103,6 +131,9 @@ public class ProductionWidget extends Table implements ProductionListener {
 
     // ---------< Capacity >---------
 
+    /**
+     * Initializes the capacity management section of the widget
+     */
     public void initCapacitySection() {
 
         this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, this.main.getUiSkin());
@@ -124,13 +155,16 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.add(this.upgradeCapacityButton);
     }
 
+    /**
+     * Updates the labels/buttons when the listener is triggered
+     */
     @Override
-    public void productionCapacityUpgraded(GameState gameState) {
+    public void productionCapacityUpgraded() {
 
-        this.CapacityLabel.setText(String.format("Capacity: %d", gameState.getCompany().getProductionCapacity(this.ID)));
-        this.capacityBar.setValue(gameState.getCompany().getProductionCapacity(this.ID));
+        this.CapacityLabel.setText(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity(this.ID)));
+        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity(this.ID));
 
-        if (gameState.getCompany().getProductionCapacity(this.ID) == Production.getMaxCapacity()) {
+        if (this.gameState.getCompany().getProductionCapacity(this.ID) == Production.getMaxCapacity()) {
 
             this.upgradeCapacityButton.setVisible(false);
         }

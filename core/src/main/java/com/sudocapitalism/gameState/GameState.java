@@ -93,20 +93,30 @@ public class GameState {
         this.listeners.remove(listener);
     }
 
-    // ---< Notify >---
-
-
 
     // ----------< Time >----------
 
+    /**
+     * Adds a listener to the Time class
+     *
+     * @param timeListener The class to be added
+     */
     public void addTimeListener(TimeListener timeListener) {
         this.time.addTimeListener(timeListener);
     }
 
+    /**
+     * Returns the current week of the game
+     *
+     * @return An int representing the week's number
+     */
     public int getWeek() {
         return this.time.getWeek();
     }
 
+    /**
+     * Calls the .nextWeek() method in the {@link Time} class
+     */
     public void nextWeek() {
         this.time.nextWeek();
     }

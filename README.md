@@ -275,61 +275,67 @@ classDiagram
 
 ```
 sudocapitalism
-├── character
+├── 🖿 character
 │   ├── Genre.java
 │   ├── Person.java
 │   ├── Player.java
-│   └── worker
+│   └── 🖿 worker
 │       ├── InventoryManager.java
 │       ├── MarketingManager.java
 │       ├── ProductionManager.java
 │       └── Worker.java
-├── company
+├── 🖿 company
 │   ├── Company.java
 │   └── CompanyListener.java
-├── gameState
-│   ├── economy
+├── 🖿 gameState
+│   ├── 🖿 economy
 │   │   └── Economy.java
 │   ├── GameState.java
 │   ├── GameStateListener.java
-│   ├── production
+│   ├── 🖿 production
 │   │   ├── Production.java
 │   │   ├── ProductionListener.java
 │   │   └── Product.java
-│   ├── reputation
+│   ├── 🖿 reputation
 │   │   └── Reputation.java
-│   └── time
+│   └── 🖿 time
 │       ├── Time.java
 │       └── TimeListener.java
-├── item
-│   ├── consumable
+├── 🖿 item
+│   ├── 🖿 consumable
 │   │   ├── Consumable.java
 │   │   └── ConsumableType.java
 │   ├── Effect.java
-│   ├── equipment
+│   ├── 🖿 equipment
 │   │   ├── clothing
 │   │   └── tool
 │   └── Item.java
 ├── Main.java
-└── ui
-    ├── game
-    │   ├── dashboards
-    │   │   └── ProductionWidget.java
-    │   ├── layout
+└── 🖿 ui
+    ├── 🖿 game
+    │   ├── 🖿 dashboards
+    │   ├── 🖿 layout
     │   │   ├── MainScreenLayout.java
     │   │   ├── SideBar.java
     │   │   └── TopBar.java
-    │   └── MainScreen.java
-    ├── menu
+    │   ├── MainScreen.java
+    │   └── widgets
+    │       └── ProductionWidget.java
+    ├── 🖿 menu
     │   ├── HomeScreen.java
     │   ├── LoadScreen.java
     │   ├── NewGameScreen.java
     │   └── OptionsScreen.java
-    └── utils
+    └── 🖿 utils
         └── ColorWrapper.java
 ```
 
 ## Changelog
+
+**v0.2.16**
+
+- Added 🖿 icons in the files tree to make it slightly more readable :)
+- Doc added to `ProductionWidget`, `Main`, `Production`, `GameState`, `Product` and `ProductionListener`.
 
 **v0.2.15**
 

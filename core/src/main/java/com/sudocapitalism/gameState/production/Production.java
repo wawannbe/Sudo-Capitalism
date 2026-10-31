@@ -3,6 +3,12 @@ package com.sudocapitalism.gameState.production;
 import com.sudocapitalism.gameState.GameState;
 import java.util.*;
 
+/**
+ * Represents a production the player can create in its company.
+ * A company can own multiple productions.
+ *
+ * @author Elmouu
+ */
 public class Production {
 
     // ---------< Attributes >---------
@@ -27,12 +33,13 @@ public class Production {
 
     // ---< Product >---
 
-    private Product producedProduct;
+    /** The product selected to be produced in this production */
+    private final Product producedProduct;
 
     // ---< Inventory >---
 
-    /** The products the production has in stock */
-    private final Map<Product, Integer> inventory;
+    /** The inventory is shared between all productions */
+    private static final Map<Product, Integer> INVENTORY = new HashMap<>();
 
     /** Listeners that subscribes to the Production */
     private final List<ProductionListener> productionListeners;
@@ -56,8 +63,6 @@ public class Production {
 
         this.level = 1;
         this.capacity = 100;
-
-        this.inventory = new HashMap<>();
 
         this.producedProduct = product;
     }
@@ -140,24 +145,39 @@ public class Production {
     public void notifyLevelUpgraded() {
 
         for (ProductionListener productionListener : this.productionListeners) {
-            productionListener.productionLevelUpgraded(this.gameState);
+            productionListener.productionLevelUpgraded();
         }
     }
 
 
     // ---------< Capacity >---------
 
+    /**
+     * Returns the maximum capacity the productions can be
+     *
+     * @return an int representing the max capacity
+     */
     public static int getMaxCapacity() {
         return MAX_CAPACITY;
     }
 
+    /**
+     * Returns the current capacity of the inventory
+     *
+     * @return an int representing the current capacity
+     */
     public int getCapacity() {
         return this.capacity;
     }
 
+    /**
+     * Upgrades the inventory's capacity until the maximum capacity is reached
+     */
     public void upgradeCapacity() {
 
-        this.capacity += 100;
+        if (this.capacity < MAX_CAPACITY) {
+            this.capacity += 100;
+        }
 
         notifyCapacityUpgraded();
     }
@@ -170,13 +190,18 @@ public class Production {
     public void notifyCapacityUpgraded() {
 
         for (ProductionListener productionListener : this.productionListeners) {
-            productionListener.productionCapacityUpgraded(this.gameState);
+            productionListener.productionCapacityUpgraded();
         }
     }
 
 
     // ---------< Product >---------
 
+    /**
+     * Returns the product being produced in this production
+     *
+     * @return The Product
+     */
     public Product getProducedProduct() {
         return this.producedProduct;
     }
@@ -190,7 +215,7 @@ public class Production {
      * @return Map<Product, Integer> The inventory
      */
     public Map<Product, Integer> getInventory() {
-        return Collections.unmodifiableMap(this.inventory);
+        return Collections.unmodifiableMap(INVENTORY);
     }
 
     /**
@@ -202,7 +227,7 @@ public class Production {
 
         int amount = 0;
 
-        for (Map.Entry<Product, Integer> entry : this.inventory.entrySet()) {
+        for (Map.Entry<Product, Integer> entry : INVENTORY.entrySet()) {
 
             amount += entry.getValue();
         }
@@ -221,12 +246,12 @@ public class Production {
 
         if (this.usedCapacity() + amount <= this.capacity) {        // Checks if there is enough capacity to hold the new Products
 
-            if (this.inventory.containsKey(product)) {              // Checks if the Product is already registered in the inventory
+            if (INVENTORY.containsKey(product)) {              // Checks if the Product is already registered in the inventory
 
-                this.inventory.replace(product, this.inventory.get(product) + amount);  // Updates the amount if that's the case
+                INVENTORY.replace(product, INVENTORY.get(product) + amount);  // Updates the amount if that's the case
 
             } else {
-                this.inventory.put(product, amount);                                    // Registers it if not
+                INVENTORY.put(product, amount);                                    // Registers it if not
             }
         }
     }
@@ -239,11 +264,11 @@ public class Production {
      */
     public boolean removeFromInventory(Product product, int amount) {
 
-        if (this.inventory.containsKey(product)) {      // Checks whether the product is actually in stock
+        if (INVENTORY.containsKey(product)) {      // Checks whether the product is actually in stock
 
-            if (amount >= this.inventory.get(product)) {
+            if (amount >= INVENTORY.get(product)) {
 
-                this.inventory.replace(product, this.inventory.get(product) - amount);
+                INVENTORY.replace(product, INVENTORY.get(product) - amount);
 
                 return true;
             }
