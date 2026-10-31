@@ -338,7 +338,7 @@ sudocapitalism
 Builds:
 
 <details open>
-    <summary>PA-0.3.0</summary>
+    <summary>PA-0.3</summary>
 
 **v0.3.2**
 
