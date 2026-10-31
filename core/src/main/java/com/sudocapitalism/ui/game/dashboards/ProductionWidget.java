@@ -1,6 +1,5 @@
 package com.sudocapitalism.ui.game.dashboards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -9,11 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
 import com.sudocapitalism.gameState.production.ProductionListener;
 
-public class ProductionDashboard extends Table implements ProductionListener {
+public class ProductionWidget extends Table implements ProductionListener {
 
     // ---------< Attributes >---------
 
@@ -49,21 +47,21 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
     // ---------< Constructor >---------
 
-    public ProductionDashboard(Main main, GameState gameState) {
+    public ProductionWidget(Main main, GameState gameState) {
 
         this.ID = idCounter++;
 
-        this.setDebug(false);
+        this.setDebug(true);
 
         this.main = main;
 
         this.gameState = gameState;
         this.gameState.getCompany().addProductionListener(this, this.ID);
 
+        this.add(new Label(this.gameState.getCompany().getProducedProduct(0).getName() + " production", this.main.getUiSkin())).colspan(3).row();
+
         this.initLevelSection();
         this.initCapacitySection();
-
-        this.add(new Label(this.gameState.getCompany().getProducedProduct(0).getName(), this.main.getUiSkin())).row();
     }
 
 

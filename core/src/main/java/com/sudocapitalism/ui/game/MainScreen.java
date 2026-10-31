@@ -2,21 +2,13 @@ package com.sudocapitalism.ui.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.GameStateListener;
-import com.sudocapitalism.gameState.time.TimeListener;
-import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
 import com.sudocapitalism.ui.game.layout.MainScreenLayout;
-import com.sudocapitalism.ui.game.layout.SideBar;
-import com.sudocapitalism.ui.game.layout.TopBar;
 
 public class MainScreen implements Screen {
 

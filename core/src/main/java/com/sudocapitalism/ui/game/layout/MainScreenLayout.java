@@ -4,11 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
+import com.sudocapitalism.ui.game.dashboards.ProductionWidget;
 
 public class MainScreenLayout extends Table {
 
-    private final ProductionDashboard productionDashboard;
+    private final ProductionWidget productionDashboard;
 
     public MainScreenLayout(Main main, GameState gameState) {
 
@@ -25,7 +25,7 @@ public class MainScreenLayout extends Table {
 
         SideBar buttonGroup = new SideBar(main, gameState, this);
 
-        this.productionDashboard = new ProductionDashboard(main, gameState);
+        this.productionDashboard = new ProductionWidget(main, gameState);
 
         ScrollPane scrollPane = new ScrollPane(this.productionDashboard);
 
