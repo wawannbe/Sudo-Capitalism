@@ -332,8 +332,14 @@ sudocapitalism
 
 ## Changelog
 
+Builds:
+
+<details open>
+    <summary>PA-0.2</summary>
+
 **v0.2.16**
 
+- The changelog has been organized into version dropdowns.
 - Added 🖿 icons in the files tree to make it slightly more readable :)
 - Doc added to `ProductionWidget`, `Main`, `Production`, `GameState`, `Product` and `ProductionListener`.
 
@@ -408,6 +414,11 @@ sudocapitalism
 - Major code refactoring.
 - Removed unnecessary listeners.
 
+</details>
+
+<details>
+    <summary>PA-0.1</summary>
+
 **v0.1.7**
 
 - Changed the UI of the game.
@@ -444,7 +455,7 @@ sudocapitalism
 
 **v0.1.0**
 
-- A `DebugScreen` has been added when starting a new game to check if the backend is running properly 
+- A `DebugScreen` has been added when starting a new game to check if the backend is running properly
 - A `MainScreen` has been added to be the screen that handles the game in the future.
 - A `GameState` class has been implemented to handle the backend and the game loop, helped by the `GameStateListener` class.
 - The `HomeScreen` and `LoadScreen` have been updated.
@@ -452,7 +463,12 @@ sudocapitalism
 - An empty `OptionsScreen` has been created to handle settings in the future.
 - The backend is being implemented with classes such as `Person`, `Economy`...
 
-**v0.0.1**
+</details>
+
+<details>
+    <summary>I-0.0</summary>
+
+**v0.0.2**
 
 - A `HomeScreen` class has been created to display a proper home screen.
 - A `LoadScreen`  class has been created to display the ability to load or start a new game.
@@ -465,6 +481,10 @@ sudocapitalism
 **Initial commit**
 
 - The game can be run, for now it is just displaying the [LibGDX](https://libgdx.com/) logo.
+
+</details>
+
+*Note: builds labeled 'PA' means they are Pre-Alpha builds, build labeled 'I' means it's the initial build.*
 
 ## Licences
 
