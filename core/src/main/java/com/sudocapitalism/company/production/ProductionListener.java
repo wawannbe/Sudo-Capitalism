@@ -1,4 +1,4 @@
-package com.sudocapitalism.gameState.production;
+package com.sudocapitalism.company.production;
 
 /**
  * Used to trigger updates when events related with the production occurs in the game.
@@ -8,6 +8,4 @@ package com.sudocapitalism.gameState.production;
 public interface ProductionListener {
 
     default void productionLevelUpgraded() {}
-
-    default void productionCapacityUpgraded() {}
 }

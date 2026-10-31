@@ -2,12 +2,11 @@ package com.sudocapitalism;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.production.Product;
+import com.sudocapitalism.company.production.Product;
 import com.sudocapitalism.ui.game.MainScreen;
 import com.sudocapitalism.ui.menu.HomeScreen;
 import com.sudocapitalism.ui.menu.NewGameScreen;

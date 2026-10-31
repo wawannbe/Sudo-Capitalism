@@ -3,10 +3,12 @@ package com.sudocapitalism.company;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.worker.Worker;
+import com.sudocapitalism.company.production.storage.Storage;
+import com.sudocapitalism.company.production.storage.StorageListener;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.production.Product;
-import com.sudocapitalism.gameState.production.Production;
-import com.sudocapitalism.gameState.production.ProductionListener;
+import com.sudocapitalism.company.production.Product;
+import com.sudocapitalism.company.production.Production;
+import com.sudocapitalism.company.production.ProductionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,12 @@ public class Company {
     private final List<Production> productionsList;
 
 
+    // ---< Storage >---
+
+    /** The storage that holds all the items that the company produces. Shared between all productions */
+    private final Storage storage;
+
+
     // ---< Listeners >---
 
     /** List of listeners of the company */
@@ -75,6 +83,8 @@ public class Company {
         this.gameState = gameState;
 
         this.productionsList = new ArrayList<>();
+
+        this.storage = new Storage();
 
         this.companyListeners = new ArrayList<>();
     }
@@ -204,23 +214,30 @@ public class Company {
         }
     }
 
-    // ---< Capacity >---
-
-    public int getProductionCapacity(int idx) {
-        return this.productionsList.get(idx).getCapacity();
-    }
-
-    public void upgradeCapacity(int idx) {
-
-        this.productionsList.get(idx).upgradeCapacity();
-        this.spendMoney(200);
-    }
-
     // ---< Production Listeners>---
 
     public void addProductionListener(ProductionListener productionListener, int idx) {
 
         this.productionsList.get(idx).addProductionListener(productionListener);
+    }
+
+
+    // ---------< Storage >---------
+
+    public int getStorageCapacity() {
+        return this.storage.getCapacity();
+    }
+
+    public void upgradeCapacity() {
+
+        this.storage.upgradeCapacity();
+        this.spendMoney(200);
+    }
+
+    // ---< Storage Listeners>---
+
+    public void addStorageListener(StorageListener storageListener) {
+        this.storage.addStorageListener(storageListener);
     }
 
 

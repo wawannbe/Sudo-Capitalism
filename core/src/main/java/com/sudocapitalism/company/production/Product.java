@@ -1,12 +1,8 @@
-package com.sudocapitalism.gameState.production;
+package com.sudocapitalism.company.production;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.OrderedMap;
 import com.sudocapitalism.item.Item;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 /**

@@ -6,7 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.ui.game.widgets.ProductionWidget;
+import com.sudocapitalism.ui.game.widgets.production.CapacityWidget;
+import com.sudocapitalism.ui.game.widgets.production.ProductionWidget;
 
 /**
  * Handles the UI on the production management
@@ -63,6 +64,8 @@ public class ProductionDashboard extends Table {
         this.initNewProductionDialog();     // Initializes the whole dialog
 
         this.initNewProductionButton();     // Initializes the button that triggers the dialog
+
+        this.add(new CapacityWidget(this.main, this.gameState));
     }
 
 

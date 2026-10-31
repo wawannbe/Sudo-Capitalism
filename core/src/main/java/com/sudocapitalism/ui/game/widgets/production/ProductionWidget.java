@@ -1,4 +1,4 @@
-package com.sudocapitalism.ui.game.widgets;
+package com.sudocapitalism.ui.game.widgets.production;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
-import com.sudocapitalism.gameState.production.Production;
-import com.sudocapitalism.gameState.production.ProductionListener;
+import com.sudocapitalism.company.production.Production;
+import com.sudocapitalism.company.production.ProductionListener;
 
 /**
  * Widget to allow displaying infos about a production in the game and managing it.
@@ -49,18 +49,6 @@ public class ProductionWidget extends Table implements ProductionListener {
     private ProgressBar levelBar;
 
 
-    // ---< Capacity >---
-
-    /** Label showing the capacity of the widget's assigned production */
-    private Label CapacityLabel;
-
-    /** Button to upgrade its production's capacity */
-    private TextButton upgradeCapacityButton;
-
-    /** Little progress bar to show the capacity in a cooler way */
-    private ProgressBar capacityBar;
-
-
     // ---------< Constructor >---------
 
     /**
@@ -83,7 +71,6 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.add(new Label(this.gameState.getCompany().getProducedProduct(this.ID).getName() + " production", this.main.getUiSkin())).colspan(3).row();
 
         this.initLevelSection();
-        this.initCapacitySection();
     }
 
 
@@ -126,49 +113,6 @@ public class ProductionWidget extends Table implements ProductionListener {
         if (this.gameState.getCompany().getProductionLevel(this.ID) == Production.getMaxLevel()) {
 
             this.upgradeLevelButton.setVisible(false);
-        }
-    }
-
-
-    // ---------< Capacity >---------
-
-    /**
-     * Initializes the capacity management section of the widget
-     */
-    public void initCapacitySection() {
-
-        this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, this.main.getUiSkin());
-        this.capacityBar.setAnimateDuration(0.2f);
-        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity(this.ID));
-        this.capacityBar.setColor(this.main.getBackgroundColor());
-
-        this.CapacityLabel = new Label(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity(this.ID)), this.main.getUiSkin());
-
-        this.upgradeCapacityButton = new TextButton("^", main.getUiSkin());
-        this.upgradeCapacityButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeCapacity(ID);
-            }
-        });
-
-        this.add(this.CapacityLabel).padRight(10f);
-        this.add(capacityBar);
-        this.add(this.upgradeCapacityButton);
-    }
-
-    /**
-     * Updates the labels/buttons when the listener is triggered
-     */
-    @Override
-    public void productionCapacityUpgraded() {
-
-        this.CapacityLabel.setText(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity(this.ID)));
-        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity(this.ID));
-
-        if (this.gameState.getCompany().getProductionCapacity(this.ID) == Production.getMaxCapacity()) {
-
-            this.upgradeCapacityButton.setVisible(false);
         }
     }
 }

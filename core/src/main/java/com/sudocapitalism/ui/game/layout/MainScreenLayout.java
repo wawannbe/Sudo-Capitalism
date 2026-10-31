@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
 import com.sudocapitalism.ui.game.dashboards.ProductionDashboard;
-import com.sudocapitalism.ui.game.widgets.ProductionWidget;
 
 public class MainScreenLayout extends Table {
 

@@ -340,6 +340,10 @@ Builds:
 <details open>
     <summary>PA-0.3</summary>
 
+**v0.3.3**
+
+- The inventory system has been replaced by a shared storage between all productions and managed by the Company.
+
 **v0.3.2**
 
 - Changed some esthetics of the UI.
