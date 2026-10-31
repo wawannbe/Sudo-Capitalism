@@ -234,6 +234,10 @@ public class Company {
         this.spendMoney(200);
     }
 
+    public int getUsedStorageCapacity() {
+        return this.storage.usedCapacity();
+    }
+
     // ---< Storage Listeners>---
 
     public void addStorageListener(StorageListener storageListener) {

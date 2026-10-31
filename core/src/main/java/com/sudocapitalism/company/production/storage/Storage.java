@@ -18,7 +18,7 @@ public class Storage {
     // ---< Capacity >---
 
     /** The maximum capacity the inventory can be */
-    private static final int MAX_CAPACITY = 1000000;
+    private static final int MAX_CAPACITY = 1000;
 
     /* Total amount of Products that can currently be stored in the Production */
     private int capacity;
@@ -90,7 +90,7 @@ public class Storage {
     public void upgradeCapacity() {
 
         if (capacity < MAX_CAPACITY) {
-            capacity += 100;
+            capacity += 25;
         }
 
         notifyStorageCapacityUpgraded();

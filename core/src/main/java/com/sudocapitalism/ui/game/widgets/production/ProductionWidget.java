@@ -29,6 +29,7 @@ public class ProductionWidget extends Table implements ProductionListener {
     /** The ID of the widget - used to avoid multiple widgets pointing at the same production */
     private final int ID;
 
+
     // ---< GameState & Main >---
 
     /** The GameState used in the widget */
