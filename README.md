@@ -340,6 +340,10 @@ Builds:
 <details open>
     <summary>PA-0.3.0</summary>
 
+**v0.3.1**
+
+- Doc added to `ProductionDashboard`.
+
 **v0.3.0**
 
 A big step has been done in terms of backend and UI.
