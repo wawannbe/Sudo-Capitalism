@@ -343,7 +343,7 @@ Builds:
 **v0.2.16**
 
 - The changelog has been organized into version dropdowns.
-- Added 🖿 icons in the files tree to make it slightly more readable :)
+- Added 📁 icons in the files tree to make it slightly more readable :)
 - Doc added to `ProductionWidget`, `Main`, `Production`, `GameState`, `Product` and `ProductionListener`.
 
 **v0.2.15**
