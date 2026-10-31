@@ -13,6 +13,9 @@ The game is using [LibGDX](https://libgdx.com/) to run.
 
 ## Class diagram
 
+> [!NOTE]
+> I try my best to keep the diagram updated along development, some things might be slightly out of date sometimes in it.
+
 ```mermaid
 classDiagram
     
@@ -484,7 +487,8 @@ Builds:
 
 </details>
 
-*Note: builds labeled 'PA' means they are Pre-Alpha builds, build labeled 'I' means it's the initial build.*
+> [!NOTE]
+>*Builds labeled 'PA' means they are Pre-Alpha builds, build labeled 'I' means it's the initial build.*
 
 ## Licences
 
