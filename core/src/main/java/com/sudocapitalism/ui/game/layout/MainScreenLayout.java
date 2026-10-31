@@ -29,7 +29,7 @@ public class MainScreenLayout extends Table {
 
         this.productionDashboard = new ProductionDashboard(main, gameState, mainScreenStage);
 
-        ScrollPane scrollPane = new ScrollPane(this.productionDashboard);
+        ScrollPane scrollPane = new ScrollPane(this.productionDashboard, main.getUiSkin());
 
         Table window = new Table();
         window.setDebug(true);

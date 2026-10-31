@@ -20,7 +20,7 @@ public class TopBar extends Table implements TimeListener, CompanyListener {
         gameState.getCompany().addCompanyListener(this);
 
         this.defaults().pad(10f, 10f, 10f, 10f);
-        this.setBackground(main.getUiSkin().newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.5f)));
+        this.setBackground(main.getUiSkin().getDrawable("textfield"));
 
         Label companyNameLabel = new Label(gameState.getCompany().getName(), main.getUiSkin());
         this.companyMoneyLabel = new Label(String.format("%.2f $", gameState.getCompany().getMoney()), main.getUiSkin());

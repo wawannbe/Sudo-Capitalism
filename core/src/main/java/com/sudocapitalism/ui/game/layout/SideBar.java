@@ -42,6 +42,8 @@ public class SideBar extends Table {
 
         this.main = main;
 
+        this.setBackground(this.main.getUiSkin().getDrawable("textfield"));
+
         this.tooltipManager = new TooltipManager();
         this.tooltipManager.instant();
 

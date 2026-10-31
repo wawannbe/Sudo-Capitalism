@@ -114,7 +114,13 @@ public class ProductionDashboard extends Table {
 
                 gameState.getCompany().newProduction(main.getProductByName(productsSelection.getSelected()));   // Creates a new Production
 
-                add(new ProductionWidget(main, gameState)).padBottom(10f).row();                                // Adds the widget that goes with it
+                if ((getChildren().size %2) == 0) {
+
+                    add(new ProductionWidget(main, gameState)).pad(10f).row();
+
+                } else {
+                    add(new ProductionWidget(main, gameState)).pad(10f);
+                }
 
                 newProductionDialog.hide();                                                                     // Closes the dialog
             }

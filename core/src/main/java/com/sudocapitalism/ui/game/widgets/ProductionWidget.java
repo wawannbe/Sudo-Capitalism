@@ -73,12 +73,12 @@ public class ProductionWidget extends Table implements ProductionListener {
 
         this.ID = ID_COUNTER ++;
 
-        this.setDebug(true);
-
         this.main = main;
 
         this.gameState = gameState;
         this.gameState.getCompany().addProductionListener(this, this.ID);
+
+        this.setBackground(this.main.getUiSkin().getDrawable("textfield"));
 
         this.add(new Label(this.gameState.getCompany().getProducedProduct(this.ID).getName() + " production", this.main.getUiSkin())).colspan(3).row();
 
@@ -97,6 +97,7 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, this.main.getUiSkin());
         this.levelBar.setAnimateDuration(0.2f);
         this.levelBar.setValue(this.gameState.getCompany().getProductionLevel(this.ID));
+        this.levelBar.setColor(this.main.getBackgroundColor());
 
         this.LevelLabel = new Label(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel(this.ID)), this.main.getUiSkin());
 
@@ -139,6 +140,7 @@ public class ProductionWidget extends Table implements ProductionListener {
         this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, this.main.getUiSkin());
         this.capacityBar.setAnimateDuration(0.2f);
         this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity(this.ID));
+        this.capacityBar.setColor(this.main.getBackgroundColor());
 
         this.CapacityLabel = new Label(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity(this.ID)), this.main.getUiSkin());
 

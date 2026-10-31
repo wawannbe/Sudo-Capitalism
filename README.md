@@ -340,6 +340,11 @@ Builds:
 <details open>
     <summary>PA-0.3.0</summary>
 
+**v0.3.2**
+
+- Changed some esthetics of the UI.
+- Modified the way new productions are visually added to the dashboard.
+
 **v0.3.1**
 
 - Doc added to `ProductionDashboard`.
