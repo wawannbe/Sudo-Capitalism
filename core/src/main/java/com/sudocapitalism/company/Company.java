@@ -1,8 +1,10 @@
 package com.sudocapitalism.company;
 
+import com.sudocapitalism.Main;
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.worker.Worker;
 import com.sudocapitalism.gameState.GameState;
+import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
 import com.sudocapitalism.gameState.production.ProductionListener;
 
@@ -39,7 +41,6 @@ public class Company {
     /** THe GameState being used by the company */
     private final GameState gameState;
 
-
     // ---------< Constructor >---------
 
     /**
@@ -48,7 +49,7 @@ public class Company {
      * along with an empty list of employees.
      * The default name can be overridden by the player
      */
-    public Company(GameState gameState) {
+    public Company(GameState gameState, Main main) {
         this.name = "NoNameCorp";
         this.money = 2000.0;
 
@@ -56,7 +57,7 @@ public class Company {
 
         this.gameState = gameState;
 
-        this.production = new Production(this.gameState);
+        this.production = new Production(this.gameState, main.getAvailableToProduce().getFirst());  // Defaulting to the first value for test purposes
 
         this.companyListeners = new ArrayList<>();
     }
@@ -153,6 +154,10 @@ public class Company {
 
 
     // ---------< Production >---------
+
+    public Product getProducedProduct() {
+        return this.production.getProducedProduct();
+    }
 
     // ---< Level >---
 

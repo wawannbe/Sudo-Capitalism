@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.sudocapitalism.Main;
 import com.sudocapitalism.gameState.GameState;
+import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.production.Production;
 import com.sudocapitalism.gameState.production.ProductionListener;
 
@@ -16,35 +17,56 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
     // ---------< Attributes >---------
 
+    private final GameState gameState;
+
+    private final Main main;
+
+
     // ---< Level >---
 
+    private Label LevelLabel;
 
-    private final Label LevelLabel;
+    private TextButton upgradeLevelButton;
 
-    private final TextButton upgradeLevelButton;
+    private ProgressBar levelBar;
 
-    private final ProgressBar levelBar;
 
     // ---< Capacity >---
 
-    private final Label CapacityLabel;
+    private Label CapacityLabel;
 
-    private final TextButton upgradeCapacityButton;
+    private TextButton upgradeCapacityButton;
 
-    private final ProgressBar capacityBar;
+    private ProgressBar capacityBar;
+
 
     // ---------< Constructor >---------
+
     public ProductionDashboard(Main main, GameState gameState) {
 
         this.setDebug(false);
 
-        gameState.getCompany().addProductionListener(this);
+        this.main = main;
 
-        this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, main.getUiSkin());
+        this.gameState = gameState;
+        this.gameState.getCompany().addProductionListener(this);
+
+        this.initLevelSection();
+        this.initCapacitySection();
+
+        this.add(new Label(this.gameState.getCompany().getProducedProduct().getName(), this.main.getUiSkin())).row();
+    }
+
+
+    // ---------< Level >---------
+
+    public void initLevelSection() {
+
+        this.levelBar = new ProgressBar(0, Production.getMaxLevel(), 1f, false, this.main.getUiSkin());
         this.levelBar.setAnimateDuration(0.2f);
-        this.levelBar.setValue(gameState.getCompany().getProductionLevel());
+        this.levelBar.setValue(this.gameState.getCompany().getProductionLevel());
 
-        this.LevelLabel = new Label(String.format("Production level: %d", gameState.getCompany().getProductionLevel()), main.getUiSkin());
+        this.LevelLabel = new Label(String.format("Production level: %d", this.gameState.getCompany().getProductionLevel()), this.main.getUiSkin());
 
         this.upgradeLevelButton = new TextButton("^", main.getUiSkin());
         this.upgradeLevelButton.addListener(new ChangeListener() {
@@ -53,27 +75,10 @@ public class ProductionDashboard extends Table implements ProductionListener {
                 gameState.getCompany().upgradeProductionLevel();
             }
         });
+
         this.add(this.LevelLabel).padRight(10f);
         this.add(levelBar);
         this.add(this.upgradeLevelButton).row();
-
-
-        this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, main.getUiSkin());
-        this.capacityBar.setAnimateDuration(0.2f);
-        this.capacityBar.setValue(gameState.getCompany().getProductionCapacity());
-
-        this.CapacityLabel = new Label(String.format("Capacity: %d", gameState.getCompany().getProductionCapacity()), main.getUiSkin());
-
-        this.upgradeCapacityButton = new TextButton("^", main.getUiSkin());
-        this.upgradeCapacityButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameState.getCompany().upgradeCapacityLevel();
-            }
-        });
-        this.add(this.CapacityLabel).padRight(10f);
-        this.add(capacityBar);
-        this.add(this.upgradeCapacityButton);
     }
 
     @Override
@@ -86,6 +91,30 @@ public class ProductionDashboard extends Table implements ProductionListener {
 
             this.upgradeLevelButton.setVisible(false);
         }
+    }
+
+
+    // ---------< Capacity >---------
+
+    public void initCapacitySection() {
+
+        this.capacityBar = new ProgressBar(0, Production.getMaxCapacity(), 100f, false, this.main.getUiSkin());
+        this.capacityBar.setAnimateDuration(0.2f);
+        this.capacityBar.setValue(this.gameState.getCompany().getProductionCapacity());
+
+        this.CapacityLabel = new Label(String.format("Capacity: %d", this.gameState.getCompany().getProductionCapacity()), this.main.getUiSkin());
+
+        this.upgradeCapacityButton = new TextButton("^", main.getUiSkin());
+        this.upgradeCapacityButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameState.getCompany().upgradeCapacityLevel();
+            }
+        });
+
+        this.add(this.CapacityLabel).padRight(10f);
+        this.add(capacityBar);
+        this.add(this.upgradeCapacityButton);
     }
 
     @Override

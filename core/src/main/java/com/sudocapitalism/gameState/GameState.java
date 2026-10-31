@@ -1,16 +1,20 @@
 package com.sudocapitalism.gameState;
 
+import com.sudocapitalism.Main;
 import com.sudocapitalism.character.Genre;
 import com.sudocapitalism.character.Person;
 import com.sudocapitalism.character.Player;
 import com.sudocapitalism.company.Company;
 import com.sudocapitalism.gameState.economy.Economy;
+import com.sudocapitalism.gameState.production.Product;
 import com.sudocapitalism.gameState.reputation.Reputation;
 import com.sudocapitalism.gameState.time.Time;
 import com.sudocapitalism.gameState.time.TimeListener;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -53,13 +57,13 @@ public class GameState {
      * Creates an empty {@link GameStateListener} list, instantiates a default {@link Company}, and then builds the {@link Economy} and {@link Reputation} systems based on that company.
      * Finally, creates a new {@link Player} instance.
      */
-    public GameState() {
+    public GameState(Main main) {
 
         this.listeners = new ArrayList<>();
 
         this.time = new Time(this);
 
-        this.company = new Company(this);
+        this.company = new Company(this, main);
 
         this.economy = new Economy(this.company);
         this.reputation = new Reputation(this.company);
@@ -129,22 +133,6 @@ public class GameState {
         return company;
     }
 
-    /**
-     * Adds the given amount of money to the player's {@link Company}.
-     * @param amount The amount of money to be added.
-     */
-    public void addMoney(double amount) {
-        this.company.addMoney(amount);
-    }
-
-    /**
-     * Removes the given amount of money to the player's {@link Company}.
-     * @param amount The amount of money to be removed.
-     */
-    public void spendMoney(double amount) {
-        this.company.spendMoney(amount);
-    }
-
 
     // ----------< Economy >----------
 
@@ -174,9 +162,7 @@ public class GameState {
 
         ArrayList<Person> people = new ArrayList<>();
 
-        try {
-            InputStream inputStream  =  getClass().getResourceAsStream("/data/people.csv");
-            Scanner scanner = new Scanner(inputStream);
+        try (Scanner scanner = new Scanner(new File("data/people.csv"))) {
             scanner.useDelimiter(",");
 
             while (scanner.hasNext()) {
@@ -192,7 +178,7 @@ public class GameState {
             scanner.close();
 
         } catch (Exception exception) {
-            System.out.println("bite");
+            System.out.println("File not found (lol)");
         }
         return people;
     }
@@ -200,6 +186,4 @@ public class GameState {
     public ArrayList<Person> getPeoplePool() {
         return peoplePool;
     }
-
-
 }

@@ -484,6 +484,11 @@ classDiagram
 
 ## Changelog
 
+**v0.2.13**
+
+- Added some data to the game
+- Started moving towards a multi-production system
+
 **v0.2.12**
 
 - Added a new way of representing a level with a progress bar.

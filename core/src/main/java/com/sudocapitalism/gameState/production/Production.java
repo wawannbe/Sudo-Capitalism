@@ -15,6 +15,7 @@ public class Production {
     /** The current level of the production */
     private int level;
 
+
     // ---< Capacity >---
 
     /** The maximum level a production can be */
@@ -22,6 +23,11 @@ public class Production {
 
     /* Total amount of Products that can be stored in the Production */
     private int capacity;
+
+
+    // ---< Product >---
+
+    private Product producedProduct;
 
     // ---< Inventory >---
 
@@ -42,7 +48,7 @@ public class Production {
      *
      * @param gameState The GameState to use in the Production
      */
-    public Production(GameState gameState) {
+    public Production(GameState gameState, Product product) {
 
         this.productionListeners = new ArrayList<>();
 
@@ -52,6 +58,8 @@ public class Production {
         this.capacity = 100;
 
         this.inventory = new HashMap<>();
+
+        this.producedProduct = product;
     }
 
 
@@ -167,6 +175,13 @@ public class Production {
     }
 
 
+    // ---------< Product >---------
+
+    public Product getProducedProduct() {
+        return this.producedProduct;
+    }
+
+
     // ---------< Inventory >---------
 
     /**
@@ -214,8 +229,6 @@ public class Production {
                 this.inventory.put(product, amount);                                    // Registers it if not
             }
         }
-
-
     }
 
     /**
